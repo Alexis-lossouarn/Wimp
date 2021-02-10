@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>WIMP-logo.png</file>
+        <file>supprimer.png</file>
+        <file>modifier.png</file>
+        <file>menu2.png</file>
+        <file>menu.png</file>
+        <file>flecheor.png</file>
+        <file>fleche.png</file>
+        <file>dogo.png</file>
+        <file>croix.png</file>
+        <file>Accueil.qml</file>
+        <file>Connexion.qml</file>
+        <file>Inscription.qml</file>
+        <file>Principale.qml</file>
+        <file>Gestion.qml</file>
+        <file>Page1Form.ui.qml</file>
+        <file>Page2Form.ui.qml</file>
+        <file>wtf.jpg</file>
+        <file>ModifProfil.qml</file>
+        <file>Ajoutanimal.qml</file>
+        <file>checkbox.png</file>
+        <file>YearPicker.qml</file>
+        <file>MonthPicker.qml</file>
+        <file>MinutePicker.qml</file>
+        <file>HourPicker.qml</file>
+        <file>DayPicker.qml</file>
+    </qresource>
+</RCC>

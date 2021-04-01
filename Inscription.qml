@@ -71,34 +71,104 @@ Item {
                     font.pointSize: rectangleHaut.height * 0.3
                 }
 
+				Text {
+					id: textnom
+					color: "#707070"
+					text: qsTr("Nom")
+					anchors.top: textAccueil.top
+					anchors.topMargin: parent.width * 0.2
+					anchors.horizontalCenter: parent.horizontalCenter
+					font.family: "Poor Richard"
+					font.pointSize: rectangleHaut.height * 0.2
+				}
+
+				Rectangle {
+					id: nomRectangle
+					width: bienvenue.width * 0.8
+					height: textnom.height
+					radius: 10
+					border.color: "#707070"
+					border.width: 1
+					anchors.top: textnom.bottom
+					anchors.horizontalCenter: parent.horizontalCenter
+					anchors.topMargin: 5
+
+					TextInput {
+						id: nomInput
+						width: textAccueil.width * 0.9
+						height: textnom.height
+						anchors.horizontalCenter: nomRectangle.horizontalCenter
+						anchors.verticalCenter: nomRectangle.verticalCenter
+						font.pixelSize: rectangleHaut.height * 0.25
+						horizontalAlignment: Text.AlignHCenter
+						anchors.verticalCenterOffset: 2
+						anchors.horizontalCenterOffset: 0
+					}
+                }
+
                 Text {
-                    id: textid
+					id: textprenom
                     color: "#707070"
-                    text: qsTr("Identifiant")
-                    anchors.top: textAccueil.top
-                    anchors.topMargin: parent.width * 0.16
+					text: qsTr("Prenom")
+					anchors.top: nomRectangle.top
+					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.family: "Poor Richard"
                     font.pointSize: rectangleHaut.height * 0.2
                 }
 
                 Rectangle {
-                    id: idRectangle
+					id: prenomRectangle
                     width: bienvenue.width * 0.8
-                    height: textid.height
+					height: textprenom.height
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
-                    anchors.top: textid.bottom
+					anchors.top: textprenom.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.topMargin: 5
 
                     TextInput {
-                        id: connexionInput
+						id: prenomInput
                         width: textAccueil.width * 0.9
-                        height: textid.height
-                        anchors.horizontalCenter: idRectangle.horizontalCenter
-                        anchors.verticalCenter: idRectangle.verticalCenter
+						height: textnom.height
+						anchors.horizontalCenter: prenomRectangle.horizontalCenter
+						anchors.verticalCenter: prenomRectangle.verticalCenter
+                        font.pixelSize: rectangleHaut.height * 0.25
+                        horizontalAlignment: Text.AlignHCenter
+                        anchors.verticalCenterOffset: 2
+                        anchors.horizontalCenterOffset: 0
+                    }
+				}
+
+                Text {
+					id: textmail
+                    color: "#707070"
+					text: qsTr("Adresse Mail")
+					anchors.top: prenomRectangle.top
+					anchors.topMargin: parent.width * 0.2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    font.family: "Poor Richard"
+                    font.pointSize: rectangleHaut.height * 0.2
+                }
+
+                Rectangle {
+					id: mailRectangle
+                    width: bienvenue.width * 0.8
+					height: textnom.height
+                    radius: 10
+                    border.color: "#707070"
+                    border.width: 1
+					anchors.top: textmail.bottom
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.topMargin: 5
+
+                    TextInput {
+						id: mailInput
+                        width: textAccueil.width * 0.9
+						height: textnom.height
+						anchors.horizontalCenter: mailRectangle.horizontalCenter
+						anchors.verticalCenter: mailRectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
                         horizontalAlignment: Text.AlignHCenter
                         anchors.verticalCenterOffset: 2
@@ -107,103 +177,33 @@ Item {
                 }
 
                 Text {
-                    id: textnom
+					id: textmdp
                     color: "#707070"
-                    text: qsTr("Nom")
-                    anchors.top: idRectangle.top
-                    anchors.topMargin: parent.width * 0.1
+					text: qsTr("Mot de passe")
+					anchors.top: mailRectangle.top
+					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.family: "Poor Richard"
                     font.pointSize: rectangleHaut.height * 0.2
                 }
 
                 Rectangle {
-                    id: nomRectangle
-                    width: bienvenue.width * 0.8
-                    height: textid.height
-                    radius: 10
-                    border.color: "#707070"
-                    border.width: 1
-                    anchors.top: textnom.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 5
-
-                    TextInput {
-                        id: nomInput
-                        width: textAccueil.width * 0.9
-                        height: textid.height
-                        anchors.horizontalCenter: nomRectangle.horizontalCenter
-                        anchors.verticalCenter: nomRectangle.verticalCenter
-                        font.pixelSize: rectangleHaut.height * 0.25
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.verticalCenterOffset: 2
-                        anchors.horizontalCenterOffset: 0
-                    }
-                }
-
-                Text {
-                    id: textprenom
-                    color: "#707070"
-                    text: qsTr("Prenom")
-                    anchors.top: nomRectangle.top
-                    anchors.topMargin: parent.width * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.family: "Poor Richard"
-                    font.pointSize: rectangleHaut.height * 0.2
-                }
-
-                Rectangle {
-                    id: prenomRectangle
-                    width: bienvenue.width * 0.8
-                    height: textid.height
-                    radius: 10
-                    border.color: "#707070"
-                    border.width: 1
-                    anchors.top: textprenom.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 5
-
-                    TextInput {
-                        id: prenomInput
-                        width: textAccueil.width * 0.9
-                        height: textid.height
-                        anchors.horizontalCenter: prenomRectangle.horizontalCenter
-                        anchors.verticalCenter: prenomRectangle.verticalCenter
-                        font.pixelSize: rectangleHaut.height * 0.25
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.verticalCenterOffset: 2
-                        anchors.horizontalCenterOffset: 0
-                    }
-                }
-
-                Text {
-                    id: textmail
-                    color: "#707070"
-                    text: qsTr("Adresse Mail")
-                    anchors.top: prenomRectangle.top
-                    anchors.topMargin: parent.width * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.family: "Poor Richard"
-                    font.pointSize: rectangleHaut.height * 0.2
-                }
-
-                Rectangle {
-                    id: mailRectangle
+					id: mdpRectangle
                    width: bienvenue.width * 0.8
-                    height: textid.height
+					height: textnom.height
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
-                    anchors.top: textmail.bottom
+					anchors.top: textmdp.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.topMargin: 5
 
                     TextInput {
-                        id: mailInput
+						id: mdpInput
                         width: textAccueil.width
-                        height: textid.height
-                        anchors.horizontalCenter: mailRectangle.horizontalCenter
-                        anchors.verticalCenter: mailRectangle.verticalCenter
+						height: textnom.height
+						anchors.horizontalCenter: mdpRectangle.horizontalCenter
+						anchors.verticalCenter: mdpRectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
                         horizontalAlignment: Text.AlignHCenter
                         anchors.verticalCenterOffset: 2
@@ -212,103 +212,33 @@ Item {
                 }
 
                 Text {
-                    id: textcle
+					id: textmdp2
                     color: "#707070"
-                    text: qsTr("Clé d'achat")
-                    anchors.top: mailRectangle.top
-                    anchors.topMargin: parent.width * 0.1
+					text: qsTr("Valider mot de passe")
+					anchors.top: mdpRectangle.top
+					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
                     font.family: "Poor Richard"
-                    font.pointSize: rectangleHaut.height * 0.2
+					font.pointSize: rectangleHaut.height * 0.2
                 }
 
                 Rectangle {
-                    id: cleRectangle
+					id: mdp2Rectangle
                     width: bienvenue.width * 0.8
-                    height: textid.height
+					height: textnom.height
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
-                    anchors.top: textcle.bottom
+					anchors.top: textmdp2.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.topMargin: 5
 
                     TextInput {
-                        id: cleInput
+						id: mdp2Input
                         width: textAccueil.width
-                        height: textid.height
-                        anchors.horizontalCenter: cleRectangle.horizontalCenter
-                        anchors.verticalCenter: cleRectangle.verticalCenter
-                        font.pixelSize: rectangleHaut.height * 0.25
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.verticalCenterOffset: 2
-                        anchors.horizontalCenterOffset: 0
-                    }
-                }
-
-                Text {
-                    id: textmdp
-                    color: "#707070"
-                    text: qsTr("Mot de passe")
-                    anchors.top: cleRectangle.top
-                    anchors.topMargin: parent.width * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.family: "Poor Richard"
-                    font.pointSize: rectangleHaut.height * 0.2
-                }
-
-                Rectangle {
-                    id: mdpRectangle
-                    width: bienvenue.width * 0.8
-                    height: textid.height
-                    radius: 10
-                    border.color: "#707070"
-                    border.width: 1
-                    anchors.top: textmdp.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 5
-
-                    TextInput {
-                        id: mdpInput
-                        width: textAccueil.width
-                        height: textid.height
-                        anchors.horizontalCenter: mdpRectangle.horizontalCenter
-                        anchors.verticalCenter: mdpRectangle.verticalCenter
-                        font.pixelSize: rectangleHaut.height * 0.25
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.verticalCenterOffset: 2
-                        anchors.horizontalCenterOffset: 0
-                    }
-                }
-
-                Text {
-                    id: textmdp2
-                    color: "#707070"
-                    text: qsTr("Valider mot de passe")
-                    anchors.top: mdpRectangle.top
-                    anchors.topMargin: parent.width * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    font.family: "Poor Richard"
-                    font.pointSize: rectangleHaut.height * 0.2
-                }
-
-                Rectangle {
-                    id: mdp2Rectangle
-                    width: bienvenue.width * 0.8
-                    height: textid.height
-                    radius: 10
-                    border.color: "#707070"
-                    border.width: 1
-                    anchors.top: textmdp2.bottom
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    anchors.topMargin: 5
-
-                    TextInput {
-                        id: mdp2Input
-                        width: textAccueil.width
-                        height: textid.height
-                        anchors.horizontalCenter: mdp2Rectangle.horizontalCenter
-                        anchors.verticalCenter: mdp2Rectangle.verticalCenter
+						height: textnom.height
+						anchors.horizontalCenter: mdp2Rectangle.horizontalCenter
+						anchors.verticalCenter: mdp2Rectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
                         horizontalAlignment: Text.AlignHCenter
                         anchors.verticalCenterOffset: 2
@@ -320,8 +250,8 @@ Item {
                        id: envoyer
                        width: 90
                        text: qsTr("Envoyer")
-                       anchors.top: mdp2Rectangle.bottom
-                       anchors.topMargin: 13
+					   anchors.top: mdp2Rectangle.bottom
+					   anchors.topMargin: mdp2Rectangle.height
                        anchors.horizontalCenter: parent.horizontalCenter
                        height: 30
 
@@ -344,8 +274,22 @@ Item {
                        }
 
                        onClicked: {
-                           //Ouvre la page Principale
-                           stackView.push("Principale.qml")
+
+							//Ouvre la page Principale
+							//Database.executerRequete("INSERT INTO clients")
+						   if(nomInput.text == "" || prenomInput.text == "" || mailInput.text == "" || mdpInput.text == "" || mdp2Input.text == "")
+						   {
+							   console.log("Champ vide")
+							}
+
+							else if(mdpInput.text != mdp2Input.text) console.log("Mot de passes différents !")
+
+							else
+						   {
+							   Database.creerCompte(prenomInput.text, nomInput.text, mailInput.text, mdpInput.text)
+							   stackView.push("Principale.qml")
+						   }
+
                        }
                 }
             }

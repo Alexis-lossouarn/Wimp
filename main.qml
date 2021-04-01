@@ -52,6 +52,7 @@ ApplicationWindow {
         }
     }
 
+
     StackView {
         id: stackView
         //Force à démarrer sur la page Accueil

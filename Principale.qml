@@ -3,6 +3,8 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
+import QtPositioning 5.12
+import QtLocation 5.12
 
 
 Item {
@@ -188,7 +190,6 @@ Item {
                     anchors.verticalCenter: ouvrircalendrier.verticalCenter
                     anchors.rightMargin: 8
                     onClicked: {
-                        console.log("onClicked" + parametre.text)
                         //ouvre les paramètres
                         parametre.open()
                     }
@@ -213,13 +214,13 @@ Item {
     }
 
     // Rectangle qui correspond à la carte Open Street
-    Rectangle {
-        id: rectangleBas
-        anchors.top: rectangleMilieu.bottom
-        width: window.width
-        height: window.height * 0.6
-        color: "black"
-    }
+	Rectangle {
+		id: rectangleBas
+		anchors.top: rectangleMilieu.bottom
+		width: window.width
+		height: window.height * 0.6
+		color: "black"
+	}
 
     //les paramètres :
     Drawer {
@@ -313,7 +314,7 @@ Item {
                     source: "croix.png"
                 }
 
-                onClicked: {
+                onClicked: {					
                     //Ferme les paramètres dès l'actionnement du bouton
                     parametre.close()
                 }
@@ -398,74 +399,109 @@ Item {
 
     //Liste du choix des animaux
     Menu {
-        id: choixtypeanimal
+		id: choixtypeanimal
         leftMargin: parent.width * 0.15
         y: rectangleTypeanimal.height * 1.98
         width: animalobserve.width
 
-        Rectangle {
-            id:animal1
-            height: row3Milieu.height
-            border.color: "#707070"
-            border.width: 1
-            color: "#ffffff"
+		ScrollView {
+			height: typedelanimal.height * 9
+			clip: true
+			ScrollBar.horizontal: ScrollBar.AlwaysOff
+			ScrollBar.vertical.policy: ScrollBar.AlwaysOn
 
-            Text {
-                id: typeAnimal1
-                text: qsTr("Type 1")
-                anchors.verticalCenter: parent.verticalCenter
-                width: rectangleTypeanimal.width
-                anchors.right: parent.right
-                font.pixelSize: typedelanimal.height
-                font.family: "Segoe UI"
-                horizontalAlignment: Text.AlignHCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "#707070"
-            }
-        }
+			Rectangle {
+				id:animal1
+				width :choixtypeanimal.availableWidth
+				height: row3Milieu.height
+				border.color: "#707070"
+				border.width: 1
+				color: "#ffffff"
 
-        Rectangle {
-            id:animal2
-            height: row3Milieu.height
-            border.color: "#707070"
-            border.width: 1
-            color: "#ffffff"
+				Text {
+					id: typeAnimal1
+					text: qsTr("Type 1")
+					anchors.verticalCenter: parent.verticalCenter
+					width: rectangleTypeanimal.width
+					anchors.right: parent.right
+					font.pixelSize: typedelanimal.height
+					font.family: "Segoe UI"
+					horizontalAlignment: Text.AlignHCenter
+					anchors.horizontalCenter: parent.horizontalCenter
+					color: "#707070"
+				}
+			}
 
-            Text {
-                id: typeAnimal2
-                text: qsTr("Type 2")
-                anchors.verticalCenter: parent.verticalCenter
-                width: rectangleTypeanimal.width
-                anchors.right: parent.right
-                font.pixelSize: typedelanimal.height
-                font.family: "Segoe UI"
-                horizontalAlignment: Text.AlignHCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "#707070"
-            }
-        }
+			Rectangle {
+				id:animal2
+				anchors.top: animal1.bottom
+				width :choixtypeanimal.availableWidth
+				height: row3Milieu.height
+				border.color: "#707070"
+				border.width: 1
+				color: "#ffffff"
 
-        Rectangle {
-            id:animal3
-            height: row3Milieu.height
-            border.color: "#707070"
-            border.width: 1
-            color: "#ffffff"
+				Text {
+					id: typeAnimal2
+					text: qsTr("Type 2")
+					anchors.verticalCenter: parent.verticalCenter
+					width: rectangleTypeanimal.width
+					anchors.right: parent.right
+					font.pixelSize: typedelanimal.height
+					font.family: "Segoe UI"
+					horizontalAlignment: Text.AlignHCenter
+					anchors.horizontalCenter: parent.horizontalCenter
+					color: "#707070"
+				}
+			}
 
-            Text {
-                id: typeAnimal3
-                text: qsTr("Type 3")
-                anchors.verticalCenter: parent.verticalCenter
-                width: rectangleTypeanimal.width
-                anchors.right: parent.right
-                font.pixelSize: typedelanimal.height
-                font.family: "Segoe UI"
-                horizontalAlignment: Text.AlignHCenter
-                anchors.horizontalCenter: parent.horizontalCenter
-                color: "#707070"
-            }
-        }
-    }
+			Rectangle {
+				id:animal3
+				anchors.top: animal2.bottom
+				width :choixtypeanimal.availableWidth
+				height: row3Milieu.height
+				border.color: "#707070"
+				border.width: 1
+				color: "#ffffff"
+
+				Text {
+					id: typeAnimal3
+					text: qsTr("Type 3")
+					anchors.verticalCenter: parent.verticalCenter
+					width: rectangleTypeanimal.width
+					anchors.right: parent.right
+					font.pixelSize: typedelanimal.height
+					font.family: "Segoe UI"
+					horizontalAlignment: Text.AlignHCenter
+					anchors.horizontalCenter: parent.horizontalCenter
+					color: "#707070"
+				}
+			}
+
+			Rectangle {
+				id:animal4
+				anchors.top: animal3.bottom
+				width :choixtypeanimal.availableWidth
+				height: row3Milieu.height
+				border.color: "#707070"
+				border.width: 1
+				color: "#ffffff"
+
+				Text {
+					id: typeAnimal4
+					text: qsTr("Type 4")
+					anchors.verticalCenter: parent.verticalCenter
+					width: rectangleTypeanimal.width
+					anchors.right: parent.right
+					font.pixelSize: typedelanimal.height
+					font.family: "Segoe UI"
+					horizontalAlignment: Text.AlignHCenter
+					anchors.horizontalCenter: parent.horizontalCenter
+					color: "#707070"
+				}
+			}
+		}
+	}
 
     //Calendrier pour sélectionner les dates
     Menu {

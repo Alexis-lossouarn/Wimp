@@ -1,6 +1,5 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
-import QtQml 2.3
 
 Item {
     id:ajoutanimal
@@ -142,44 +141,21 @@ Item {
                 width: bienvenue.width
             }
 
-            Rectangle {
-                id: typeanimalRectangle
-                width: bienvenue.width * 0.9
-                height: nomanimal.height
-                radius: 10
-                border.color: "#707070"
-                border.width: 1
-                anchors.top: typeanimal.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 2
+			ComboBox {
+				id: typeanimalRectangle
+				model: Database.listeTypes
+				width: bienvenue.width * 0.9
+				height: nomanimal.height
+				anchors.top: typeanimal.bottom
+				anchors.horizontalCenter: parent.horizontalCenter
+				anchors.topMargin: 2
 
-                //Afficher le type de l'animal
-                Text {
-                    id: typeanimalInput
-                    width: typeanimalRectangle * 0.9
-                    height: typeanimal.height
-                    anchors.horizontalCenter: typeanimalRectangle.horizontalCenter
-                    anchors.verticalCenter: typeanimalRectangle.verticalCenter
-                    font.pixelSize: rectangleHaut.height * 0.25
-                    horizontalAlignment: Text.AlignHCenter
-                    anchors.top: typeanimalRectangle.top
-                    anchors.topMargin: 2
-                }
-
-                ToolButton {
-                    id: typeanimalbutton
-                    anchors.right: typeanimalRectangle.right
-                    anchors.rightMargin: 5
-                    width: 0.1 * typeanimalRectangle.width
-                    height: 0.8 * typeanimalRectangle.height
-                    anchors.verticalCenter: typeanimalRectangle.verticalCenter
-
-                    background: Image {
-                        id: flecheor
-                        source: "flecheor.png"
-                    }
-                }
-            }
+				background:  Rectangle {
+					radius: 10
+					border.color: "#707070"
+					border.width: 1
+				}
+			}
 
             Text {
                 id:distancetxt
@@ -310,7 +286,14 @@ Item {
                    }
 
                    onClicked: {
-                       stackView.push("Gestion.qml")
+					   if (nomanimalInput.text == "" || anneeanimalInput.text == "" || typeanimal.text == "" || collierInput.text == "") console.log("Champ(s) vide(s)")
+
+					   else {
+						   console.log(typeanimalRectangle.currentText)
+						   console.log(sliderdistance.value)
+						   Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value, Database.idutilisateur)
+						   stackView.push("Gestion.qml")
+					   }
                    }
                 }
 

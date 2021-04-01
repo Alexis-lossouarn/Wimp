@@ -1,4 +1,4 @@
-QT += widgets quick quickcontrols2 sql charts
+QT += widgets quick quickcontrols2 sql charts core location
 
 CONFIG += c++11
 
@@ -7,8 +7,13 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        animaux.cpp \
+        clients.cpp \
+        colliers.cpp \
+        database.cpp \
+        gps.cpp \
         main.cpp \
-        mainwindow.cpp
+        types.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,4 +29,14 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    mainwindow.h
+    animaux.h \
+    clients.h \
+    colliers.h \
+    database.h \
+    gps.h \
+    types.h
+
+ANDROID_ABIS = armeabi-v7a
+
+DISTFILES += \
+    Crypted.java

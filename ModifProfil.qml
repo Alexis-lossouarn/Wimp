@@ -61,7 +61,7 @@ Item {
 
                         TextInput {
                             id:nom1
-                            text: qsTr("Lossouarn")
+							text: Database.name
                             anchors.verticalCenter: parent.verticalCenter
                             color: "#707070"
                             font.pointSize: rectangleHaut.height * 0.17
@@ -88,7 +88,7 @@ Item {
 
                         TextInput {
                             id:prenom1
-                            text: qsTr("Alexis")
+							text: Database.lastname
                             anchors.verticalCenter: parent.verticalCenter
                             color: "#707070"
                             font.pointSize: rectangleHaut.height * 0.17
@@ -118,7 +118,7 @@ Item {
                             id:mail1
                             anchors.verticalCenter: parent.verticalCenter
                             color: "#707070"
-                            text: qsTr("alexou22340@gmail.com")
+							text: Database.mail
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             anchors.horizontalCenter: parent.horizontalCenter
@@ -197,31 +197,6 @@ Item {
                             color: "transparent"
                         }
                     }
-                }
-
-                //Bouton qui permet de modifier la photo de profil
-                Button {
-                    id: changeavatar
-                    anchors.right: parent.right
-                    anchors.rightMargin: 1
-                    text: qsTr("Choisir le fichier")
-                    width: 0.28 * parent.width
-                    anchors.bottom: rectangle.top
-                    anchors.bottomMargin: 0.14 * parent.height
-
-                    background: Rectangle {
-                        color: "#b3a36d00"
-                        radius: 11
-                    }
-
-                    contentItem: Text {
-                        text: changeavatar.text
-                        color: "#ffffffff"
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
-                        font.pixelSize: changeavatar.height * 0.7
-                    }
-
                 }
 
                 //Rectangle de la liste des colliers
@@ -414,9 +389,16 @@ Item {
                            radius: 11
                        }
 
-                       onClicked: {
-                           //Ouvre la page Gestion
-                           stackView.push("Gestion.qml")
+                       onClicked: {                           
+
+						   while(Database.name != nom1.text || Database.lastname != prenom1.text || Database.mail != mail1.text)
+						   {
+							   Database.executerRequete("UPDATE clients SET nom = '" + nom1.text + "' WHERE email = '" + Database.mail + "'")
+							   Database.executerRequete("UPDATE clients SET prenom = '" + prenom1.text + "' WHERE email = '" + Database.mail + "'")
+						   }
+
+						   //Ouvre la page Gestion
+						   stackView.push("Gestion.qml")
                        }
                     }
 

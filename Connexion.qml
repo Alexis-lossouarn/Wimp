@@ -68,9 +68,9 @@ Item {
                 }
 
                 Text {
-                       id: connexion
+					   id: connexion
                        color: "#707070"
-                       text: qsTr("Identifiant")
+					   text: qsTr("Email")
                        anchors.top: textAccueil.bottom
                        anchors.horizontalCenter: parent.horizontalCenter
                        anchors.topMargin: parent.width * 0.2
@@ -164,8 +164,16 @@ Item {
                     }
 
                     onClicked: {
-                        //ouvrir la page principale
-                        stackView.push("Principale.qml")
+
+						if(Database.profilExist(connexionInput.text, mdpInput.text) != 1)
+						{
+							stackView.push("Principale.qml")
+							console.log("Connexion réussie !")
+						}
+
+						else if(connexionInput.text == "" || mdpInput.text == "") console.log("Champ vide !")
+
+						else console.log("Ce compte n'existe pas !")
                     }
                 }
             }

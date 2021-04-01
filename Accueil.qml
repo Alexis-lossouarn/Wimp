@@ -66,7 +66,7 @@ Item {
                        }
 
                        onClicked: {
-                           //ouvrir la page connexion
+						   //ouvrir la page connexion
                            stackView.push("Connexion.qml")
                        }
                 }

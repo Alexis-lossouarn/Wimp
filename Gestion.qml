@@ -80,6 +80,7 @@ Item {
                                     width: bienvenue.width * 0.9
                                     height: 0.8 * profil.height
 
+
                                     Text {
                                         id:nom
                                         color: "#707070"
@@ -93,7 +94,7 @@ Item {
                                         id:nom1
                                         height: 0.8 * profil.height
                                         width: grid.width - prenom.width
-                                        text: qsTr("Lossouarn")
+										text: Database.name
                                         color: "#707070"
                                         font.pointSize: rectangleHaut.height * 0.22
                                         horizontalAlignment: Text.AlignHCenter
@@ -111,7 +112,7 @@ Item {
                                         id:prenom1
                                         height: 0.8 * profil.height
                                         width: grid.width - prenom.width
-                                        text: qsTr("Alexis")
+										text: Database.lastname
                                         color: "#707070"
                                         font.pointSize: rectangleHaut.height * 0.22
                                         horizontalAlignment: Text.AlignHCenter
@@ -130,7 +131,7 @@ Item {
                                         id:mail1
                                         height: mail.height
                                         width: grid.width - prenom.width
-                                        text: qsTr("alexou22340@gmail.com")
+										text: Database.mail
                                         horizontalAlignment: Text.AlignHCenter
                                         topPadding: 4
                                         color: "#707070"

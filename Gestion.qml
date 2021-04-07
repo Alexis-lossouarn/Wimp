@@ -94,7 +94,7 @@ Item {
                                         id:nom1
                                         height: 0.8 * profil.height
                                         width: grid.width - prenom.width
-										text: Database.name
+                                        text: Database.name
                                         color: "#707070"
                                         font.pointSize: rectangleHaut.height * 0.22
                                         horizontalAlignment: Text.AlignHCenter
@@ -673,148 +673,70 @@ Avatar")
                                     }
                                 }
 
+                                Rectangle {
+                                    anchors.top: listAnimauxtxt.bottom
+                                    anchors.topMargin: 20
+                                    width: 200; height: 200
 
-                                    Rectangle {
-                                        id: animal1
-                                        border.color: "#707070"
-                                        border.width: 1
-                                        width: bienvenuep2.width * 0.9
-                                        height: listAnimauxtxt.height
-                                        anchors.top: listAnimauxtxt.bottom
-                                        anchors.topMargin: listAnimauxtxt.height * 0.5
-                                        anchors.horizontalCenter: parent.horizontalCenter
+                                    ListModel {
+                                        id: fruitModel
 
-                                        Text {
-                                            id: textanimal1
-                                            text: qsTr("Chien 1")
-                                            color: "#707070"
-                                            width: 0.6 * animal1.width
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.left: parent.left
-                                            anchors.leftMargin: 5
+                                        ListElement {
+                                            name: "Nom :"
+                                            cost: 2.45
+                                            attributes: [
+                                                ListElement { description: "Core" },
+                                                ListElement { description: "Deciduous" }
+                                            ]
                                         }
-
-                                        //Bouton modifier
-                                        ToolButton {
-                                            width: 0.2 * animal1.width
-                                            anchors.left: textanimal1.right
-                                            height: animal1.height * 0.6
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: modifier1
-                                                source: "modifier.png"
-                                            }
+                                        ListElement {
+                                            name: "Naissance :"
+                                            cost: 3.25
+                                            attributes: [
+                                                ListElement { description: "Citrus" }
+                                            ]
                                         }
-
-                                        //Bouton supprimer
-                                        Button {
-                                            width: 0.15 * animal1.width - 1
-                                            anchors.right: animal1.right
-                                            anchors.rightMargin: 1
-                                            height: animal1.height * 0.8
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: supp1
-                                                source: "supprimer.png"
-                                            }
+                                        ListElement {
+                                            name: "Type d'animal :"
+                                            cost: 1.95
+                                            attributes: [
+                                                ListElement { description: "Tropical" },
+                                                ListElement { description: "Seedless" }
+                                            ]
                                         }
-                                    }
-
-                                    Rectangle {
-                                        id: animal2
-                                        border.color: "#707070"
-                                        border.width: 1
-                                        width: bienvenuep2.width * 0.9
-                                        height: listAnimauxtxt.height
-                                        anchors.top: animal1.bottom
-                                        anchors.horizontalCenter: parent.horizontalCenter
-
-                                        Text {
-                                            id: textanimal2
-                                            text: qsTr("Chien 2")
-                                            color: "#707070"
-                                            width: 0.6 * animal1.width
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.left: parent.left
-                                            anchors.leftMargin: 5
+                                        ListElement {
+                                            name: "Distance autorisée :"
+                                            cost: 1.95
+                                            attributes: [
+                                                ListElement { description: "Tropical" },
+                                                ListElement { description: "Seedless" }
+                                            ]
                                         }
-
-                                        //Bouton modifier
-                                        ToolButton {
-                                            width: 0.2 * animal1.width
-                                            anchors.left: textanimal2.right
-                                            height: animal1.height * 0.6
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: modifier2
-                                                source: "modifier.png"
-                                            }
-                                        }
-
-                                        //Bouton supprimer
-                                        Button {
-                                            width: 0.15 * animal1.width - 1
-                                            anchors.right: animal2.right
-                                            anchors.rightMargin: 1
-                                            height: animal1.height * 0.8
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: supp2
-                                                source: "supprimer.png"
-                                            }
+                                        ListElement {
+                                            name: "Id du collier :"
+                                            cost: 1.95
+                                            attributes: [
+                                                ListElement { description: "Tropical" },
+                                                ListElement { description: "Seedless" }
+                                            ]
                                         }
                                     }
 
-                                    Rectangle {
-                                        id: animal3
-                                        border.color: "#707070"
-                                        border.width: 1
-                                        width: bienvenuep2.width * 0.9
-                                        height: listAnimauxtxt.height
-                                        anchors.top: animal2.bottom
-                                        anchors.horizontalCenter: parent.horizontalCenter
-
-                                        Text {
-                                            id: textanimal3
-                                            text: qsTr("Chat 1")
-                                            color: "#707070"
-                                            width: 0.6 * animal1.width
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.left: parent.left
-                                            anchors.leftMargin: 5
-                                        }
-
-                                        //Bouton modifier
-                                        ToolButton {
-                                            width: 0.2 * animal1.width
-                                            anchors.left: textanimal3.right
-                                            height: animal1.height * 0.6
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: modifier3
-                                                source: "modifier.png"
-                                            }
-                                        }
-
-                                        //Bouton supprimer
-                                        Button {
-                                            width: 0.15 * animal1.width - 1
-                                            anchors.right: animal3.right
-                                            anchors.rightMargin: 1
-                                            height: animal1.height * 0.8
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: supp3
-                                                source: "supprimer.png"
-                                            }
+                                    Component {
+                                        id: fruitDelegate
+                                        Row {
+                                            spacing: 10
+                                            Text { text: name }
+                                            Text { text: '$' + cost }
                                         }
                                     }
+
+                                    ListView {
+                                        anchors.fill: parent
+                                        model: fruitModel
+                                        delegate: fruitDelegate
+                                    }
+                                }
 
                                 Button {
                                        id: ajouterp2

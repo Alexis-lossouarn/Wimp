@@ -53,7 +53,7 @@ Item {
 
                     Rectangle {
                         id: rectangle1
-                        height: 0.8 * profil.height
+                        height: profil.height
                         width: grid.width * 0.95 - prenom.width
                         border.width: 1
                         radius: 11
@@ -80,7 +80,7 @@ Item {
 
                     Rectangle {
                         id: rectangle2
-                        height: 0.8 * profil.height
+                        height: profil.height
                         width: grid.width * 0.95 - prenom.width
                         border.width: 1
                         radius: 11
@@ -108,7 +108,7 @@ Item {
 
                     Rectangle {
                         id: rectangle3
-                        height: 0.8 * profil.height
+                        height: profil.height
                         width: grid.width * 0.95 - prenom.width
                         border.width: 1
                         radius: 11
@@ -367,7 +367,7 @@ Item {
                        width: ajouter.width * 0.4
                        text: qsTr("Valider")
                        anchors.verticalCenter: parent.verticalCenter
-                       anchors.leftMargin: bienvenue.width * 0.175
+                       anchors.leftMargin: bienvenue.width * 0.0875
                        height: ajouter.height * 2
                        anchors.left: boutonsbas.left
 
@@ -409,7 +409,7 @@ Item {
                           height: ajouter.height * 2
                           anchors.right: boutonsbas.right
                           anchors.verticalCenter: parent.verticalCenter
-                          anchors.rightMargin: bienvenue.width * 0.175
+                          anchors.rightMargin: bienvenue.width * 0.0875
 
                           contentItem: Text {
                               text: annuler.text

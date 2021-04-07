@@ -2,10 +2,10 @@
 #define DATABASE_H
 
 #define DRIVER_BDD QString("QPSQL")
-#define IP_BDD QString("192.168.15.145")
-#define USER_BDD QString("postgres")
-#define PASSWORD_BDD QString("root")
-#define NOM_BDD QString("wimp")
+#define IP_BDD QString("postgresql-wimp.alwaysdata.net")
+#define USER_BDD QString("wimp_alexis")
+#define PASSWORD_BDD QString("S6?YXqPkn?c&z@at")
+#define NOM_BDD QString("wimp_bdd")
 
 #include <QtSql>
 
@@ -25,6 +25,8 @@ class Database : public QObject
 
     //Table animal
     Q_PROPERTY(QStringList listeAnimaux READ getAnimaux)
+    Q_PROPERTY(QString animal_age READ getAgeAnimal)
+    Q_PROPERTY(QString animal_type READ getTypeAnimal)
 
 public:
     Database(QObject *parent = nullptr);
@@ -39,6 +41,8 @@ public:
 
     //Table animal
     Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance, QString idUtilisateur);
+    Q_INVOKABLE bool animalExist(QString nomAnimal);
+
 
     //Table client
     QString getMail();
@@ -51,7 +55,9 @@ public:
     QStringList getTypes();
 
     //Tables animal
-    QStringList getAnimaux(QString id_client);
+    QStringList getAnimaux();
+    QString getAgeAnimal();
+    QString getTypeAnimal();
 
 
 private:
@@ -66,6 +72,7 @@ private:
     QString name;
     QString lastname;
     uint idutilisateur;
+    uint idclient;
     QString mdp;
 
     //Table type
@@ -73,6 +80,9 @@ private:
 
     //Table animal
     QStringList listeAnimaux;
+    QString nom_Animal;
+    QString animal_age;
+    QString animal_type;
 
 public slots:
 };

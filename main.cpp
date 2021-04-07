@@ -23,11 +23,11 @@ int main(int argc, char *argv[])
             QString nom = query.value(1).toString();
             QDate naissance = query.value(2).toDate();
             QString type = query.value(3).toString();
-            int distance = query.value(4).toInt();
+            double distance = query.value(4).toDouble();
             uint collier = query.value(5).toUInt();
             uint util = query.value(6).toUInt();
 
-            qDebug() << id << nom;
+            qDebug() << id << nom << naissance << type << distance << collier << util;
             while(query.next())
                 {
                     for(int x=0; x < query.record().count(); ++x)

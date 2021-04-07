@@ -38,7 +38,7 @@ bool Database::creerAnimal(QString nomAnimal, QString naissance, QString type, Q
 
     if(db.isOpen())
     {
-        bool retour = r.exec("INSERT INTO animaux (nom, naissance_animal, type_animal, distance, id_utilisateur) VALUES ('" + nomAnimal + "', '" + naissance + "','" + type + "', " + distance + ", " + idUtilisateur + ")");
+        bool retour = r.exec("INSERT INTO animaux (nom_animal, naissance_animal, type_animal, distance, id_utilisateur) VALUES ('" + nomAnimal + "', '" + naissance + "','" + type + "', " + distance + ", " + idUtilisateur + ")");
         return retour;
     }
     return false;
@@ -86,7 +86,7 @@ QString Database::getMail()
 
 QString Database::getPassword()
 {
-    mdp = this->email;
+    mdp = this->password;
     return mdp;
 }
 
@@ -162,48 +162,70 @@ QStringList Database::getTypes()
     return listeTypes;
 }
 
-QStringList Database::getAnimaux(QString id_client)
+
+QStringList Database::getAnimaux()
 {
     QSqlQuery r;
-    r.exec("SELECT * FROM animaux WHERE id_utilisateur = '" + id_client + "'");
+    r.exec("SELECT * FROM animaux WHERE id_utilisateur = 1");
     r.first();
 
-    int idNom = r.record().indexOf("nom");
-    listeTypes = r.value(idNom).toStringList();
-
-    int idType = r.record().indexOf("type_animal");
-    listeTypes += r.value(idType).toStringList();
-
-    int idNee = r.record().indexOf("naissance_animal");
-    listeTypes += r.value(idNee).toStringList();
-
-    int idDistance = r.record().indexOf("distance");
-    listeTypes += r.value(idDistance).toStringList();
-
-    int idCollier = r.record().indexOf("id_collier");
-    listeTypes += r.value(idCollier).toStringList();
+    int idNom = r.record().indexOf("nom_animal");
+    listeAnimaux = r.value(idNom).toStringList();
 
     while (r.next()) {
-        listeTypes += r.value(idNom).toStringList() + r.value(idType).toStringList() + listeTypes += r.value(idNee).toStringList() + listeTypes += r.value(idDistance).toStringList() + listeTypes += r.value(idCollier).toStringList();
+        listeAnimaux += r.value(idNom).toStringList();
     }
-    qDebug() << listeTypes
-    return listeTypes;
+    return listeAnimaux;
 }
 
-/*
-bool Database::creerCompte(QString requete, QString mdp, QString email)
+bool Database::animalExist(QString nomAnimal)
 {
     QSqlQuery r;
-    QString mail = email;
-    QString hash = QString("%1").arg(QString(QCryptographicHash::hash(mdp.toUtf8(),QCryptographicHash::Sha512).toHex()));
+    r.prepare("SELECT * FROM animaux WHERE nom_animal = (:na)");
+    r.bindValue(":na", nomAnimal);
+    int existe = 0;
+    r.exec();
+    qDebug() << this->nom_Animal;
 
-    if(db.isOpen())
+    if(r.size() != 0)
     {
-        bool retour = r.exec(requete);
-        qDebug() << hash;
-        r.exec("UPDATE clients SET password = '" + hash + "' WHERE email = '" + mail + "'");
-        return retour;
+        this->nom_Animal = nomAnimal;
+        return existe;
     }
-    return false;
+
+    else {
+        existe = 1;
+        return existe;
+    }
 }
-*/
+
+QString Database::getAgeAnimal()
+{
+    QSqlQuery r;
+    qDebug() << this->nom_Animal;
+        r.prepare("SELECT * FROM animaux WHERE nom_animal = 'KIKI'");
+        r.exec();
+        r.first();
+
+        int Age_a = r.record().indexOf("naissance_animal");
+
+        animal_age = r.value(Age_a).toString();
+
+        return animal_age;
+}
+
+QString Database::getTypeAnimal()
+{
+    QSqlQuery r;
+    qDebug() << this->nom_Animal;
+        r.prepare("SELECT * FROM animaux WHERE nom_animal = 'KIKI'");
+        r.exec();
+        r.first();
+
+        int Type_a = r.record().indexOf("type_animal");
+
+        animal_type = r.value(Type_a).toString();
+
+        return animal_type;
+}
+

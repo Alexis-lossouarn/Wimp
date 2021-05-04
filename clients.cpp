@@ -33,3 +33,5 @@ uint Clients::getId_collier_client() const
 {
     return id_collier_client;
 }
+
+

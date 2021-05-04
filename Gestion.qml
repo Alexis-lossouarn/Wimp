@@ -684,41 +684,22 @@ Avatar")
                                         ListElement {
                                             name: "Nom :"
                                             cost: 2.45
-                                            attributes: [
-                                                ListElement { description: "Core" },
-                                                ListElement { description: "Deciduous" }
-                                            ]
                                         }
                                         ListElement {
                                             name: "Naissance :"
                                             cost: 3.25
-                                            attributes: [
-                                                ListElement { description: "Citrus" }
-                                            ]
                                         }
                                         ListElement {
                                             name: "Type d'animal :"
                                             cost: 1.95
-                                            attributes: [
-                                                ListElement { description: "Tropical" },
-                                                ListElement { description: "Seedless" }
-                                            ]
                                         }
                                         ListElement {
                                             name: "Distance autorisée :"
                                             cost: 1.95
-                                            attributes: [
-                                                ListElement { description: "Tropical" },
-                                                ListElement { description: "Seedless" }
-                                            ]
                                         }
                                         ListElement {
                                             name: "Id du collier :"
                                             cost: 1.95
-                                            attributes: [
-                                                ListElement { description: "Tropical" },
-                                                ListElement { description: "Seedless" }
-                                            ]
                                         }
                                     }
 

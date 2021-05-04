@@ -302,7 +302,7 @@ Item {
 					   else {
 						   console.log(typeanimalRectangle.currentText)
 						   console.log(sliderdistance.value)
-						   Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value, Database.idutilisateur)
+                           Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value)
 						   stackView.push("Gestion.qml")
 					   }
                    }

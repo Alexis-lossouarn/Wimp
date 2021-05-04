@@ -71,10 +71,10 @@ Item {
 
                                 contentItem: ListView {
                                     clip: true
+                                    onCurrentItemChanged: Database.animalExist(choixAnimal.currentText)
                                     implicitHeight: contentHeight
+                                    ScrollIndicator.vertical: ScrollIndicator {}
                                     model: choixAnimal.popup.visible ? choixAnimal.delegateModel : null
-
-                                    ScrollIndicator.vertical: ScrollIndicator { }
                                 }
 
                                 background: Rectangle {
@@ -107,7 +107,8 @@ Item {
 
                     Text {
                         id: typedelanimal
-                        text: Database.animal_type
+                        text: qsTr("Type")
+
                         width: rectangleTypeanimal.width
                         color: "#ffffff"
                         anchors.verticalCenter: parent.verticalCenter
@@ -131,7 +132,7 @@ Item {
 
                     Text {
                         id: ageanimal
-                        text: Database.animal_age
+                        text: qsTr("Age")
                         anchors.verticalCenter: parent.verticalCenter
                         width: rectangleAgeanimal.width
                         color: "#ffffff"

@@ -24,9 +24,10 @@ class Database : public QObject
     Q_PROPERTY(QStringList listeTypes READ getTypes)
 
     //Table animal
-    Q_PROPERTY(QStringList listeAnimaux READ getAnimaux)
-    Q_PROPERTY(QString animal_age READ getAgeAnimal)
-    Q_PROPERTY(QString animal_type READ getTypeAnimal)
+    Q_PROPERTY(QStringList listedatesanimaux READ getDatesanimaux)
+    Q_PROPERTY(QStringList listetypesanimaux READ getTypesanimaux)
+    Q_PROPERTY(QStringList listeAnimaux READ getAnimaux_list)
+    Q_PROPERTY(QString typeanimal READ getTypeanimal)
 
 public:
     Database(QObject *parent = nullptr);
@@ -40,7 +41,7 @@ public:
     Q_INVOKABLE bool creerCompte(QString nom, QString prenom, QString email, QString mdp);
 
     //Table animal
-    Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance, QString idUtilisateur);
+    Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance);
     Q_INVOKABLE bool animalExist(QString nomAnimal);
 
 
@@ -54,10 +55,11 @@ public:
     //Table types
     QStringList getTypes();
 
-    //Tables animal
-    QStringList getAnimaux();
-    QString getAgeAnimal();
-    QString getTypeAnimal();
+    //Table animaux
+    QStringList getTypesanimaux();
+    QStringList getDatesanimaux();
+    QStringList getAnimaux_list();
+    QString getTypeanimal();
 
 
 private:
@@ -67,22 +69,26 @@ private:
 
     //Table client
     QString email;
-    QString password;
     QString mail;
+    QString password;
+    QString mdp;
+    int id_client;
     QString name;
     QString lastname;
-    uint idutilisateur;
-    uint idclient;
-    QString mdp;
 
     //Table type
     QStringList listeTypes;
 
     //Table animal
     QStringList listeAnimaux;
+    QStringList listetypesanimaux;
+    QStringList listedatesanimaux;
     QString nom_Animal;
-    QString animal_age;
-    QString animal_type;
+    int id_animal;
+    QString date_animal;
+    QString type_animal;
+
+    bool recuperer(QString requete, QStringList &donnees);
 
 public slots:
 };

@@ -118,7 +118,8 @@ Item {
                     anchors.verticalCenter: anneeanimalRectangle.verticalCenter
 
                     background: Image {
-                    source: "flecheor.png"
+                        id :flecheor
+                        source: "flecheor.png"
                     }
 
                     onClicked: {
@@ -155,6 +156,16 @@ Item {
 					border.color: "#707070"
 					border.width: 1
 				}
+
+                indicator: Image {
+                    id: flechegris
+                    source: "fleche.png"
+                    width: flecheor.width *.9
+                    height: flecheor.height
+                    anchors.right: typeanimalRectangle.right
+                    anchors.rightMargin: 5
+                    anchors.verticalCenter: typeanimalRectangle.verticalCenter
+                }
 			}
 
             Text {
@@ -291,7 +302,7 @@ Item {
 					   else {
 						   console.log(typeanimalRectangle.currentText)
 						   console.log(sliderdistance.value)
-						   Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value, Database.idutilisateur)
+                           Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value)
 						   stackView.push("Gestion.qml")
 					   }
                    }

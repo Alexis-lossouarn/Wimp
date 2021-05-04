@@ -37,41 +37,52 @@ Item {
                     anchors.bottomMargin: animalobserve.height * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    ToolButton {
+                    ComboBox {
                         id: choixAnimal
-                        height: fleche.height
+                        model: Database.listeAnimaux
+                        height: animalobserve.height * 0.95
                         opacity: 0.5
-                        width: fleche.width
+                        width: animalobserve.width * .9
                         anchors.right: animalobserve.right
-                        anchors.rightMargin: 6
-                        flat: false
-                        highlighted: false
-                        display: AbstractButton.TextBesideIcon
+                        anchors.rightMargin: 0
                         clip: false
                         anchors.verticalCenter: parent.verticalCenter
-                        onClicked: {
-                            //ouvre le menu de choix de l'animal
-                            choixtypeanimal.open()
+                        anchors.horizontalCenter: animalobserve.horizontalCenter
+
+                        background: Rectangle {
+                            color: "transparent"
                         }
 
-                        Image {
-                            id: fleche
+                        indicator: Image {
+                            id: flechegris
                             source: "fleche.png"
+                            anchors.right: choixAnimal.right
+                            anchors.rightMargin: 3
+                            anchors.verticalCenter: choixAnimal.verticalCenter
                         }
-                    }
 
-                    Text {
-                        id: nomAnimal
-                        text: qsTr("Animal observé")
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.pixelSize: animalobserve.height * 0.5
-                        font.family: "Segoe UI"
-                        anchors.leftMargin: 5
-                        width: (9/10) * animalobserve.width
-                        color: "#707070"
-                        anchors.left: animalobserve.left
-                    }
+                        popup: Popup {
+                                y: choixAnimal.height * 0.8
+                                x: choixAnimal.width * 0.05
+                                width: choixAnimal.width * .9
+                                height: choixAnimal.height * 3
+                                implicitHeight: contentItem.implicitHeight
+                                padding: 1
 
+                                contentItem: ListView {
+                                    clip: true
+                                    onCurrentItemChanged: Database.animalExist(choixAnimal.currentText)
+                                    implicitHeight: contentHeight
+                                    ScrollIndicator.vertical: ScrollIndicator {}
+                                    model: choixAnimal.popup.visible ? choixAnimal.delegateModel : null
+                                }
+
+                                background: Rectangle {
+                                    radius: 0
+                                }
+                            }
+
+                    }
                 }
             }
 
@@ -96,7 +107,8 @@ Item {
 
                     Text {
                         id: typedelanimal
-                        text: qsTr("Type de l'animal")
+                        text: qsTr("Type")
+
                         width: rectangleTypeanimal.width
                         color: "#ffffff"
                         anchors.verticalCenter: parent.verticalCenter
@@ -396,112 +408,6 @@ Item {
             }
         }
     }
-
-    //Liste du choix des animaux
-    Menu {
-		id: choixtypeanimal
-        leftMargin: parent.width * 0.15
-        y: rectangleTypeanimal.height * 1.98
-        width: animalobserve.width
-
-		ScrollView {
-			height: typedelanimal.height * 9
-			clip: true
-			ScrollBar.horizontal: ScrollBar.AlwaysOff
-			ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-
-			Rectangle {
-				id:animal1
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal1
-					text: qsTr("Type 1")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-
-			Rectangle {
-				id:animal2
-				anchors.top: animal1.bottom
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal2
-					text: qsTr("Type 2")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-
-			Rectangle {
-				id:animal3
-				anchors.top: animal2.bottom
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal3
-					text: qsTr("Type 3")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-
-			Rectangle {
-				id:animal4
-				anchors.top: animal3.bottom
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal4
-					text: qsTr("Type 4")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-		}
-	}
 
     //Calendrier pour sélectionner les dates
     Menu {

@@ -1,4 +1,4 @@
-QT += widgets quick quickcontrols2 sql charts core location
+QT += widgets quick quickcontrols2 sql core location
 
 CONFIG += c++11
 

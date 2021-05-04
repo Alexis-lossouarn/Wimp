@@ -2,10 +2,10 @@
 #define DATABASE_H
 
 #define DRIVER_BDD QString("QPSQL")
-#define IP_BDD QString("192.168.15.145")
-#define USER_BDD QString("postgres")
-#define PASSWORD_BDD QString("root")
-#define NOM_BDD QString("wimp")
+#define IP_BDD QString("postgresql-wimp.alwaysdata.net")
+#define USER_BDD QString("wimp_alexis")
+#define PASSWORD_BDD QString("S6?YXqPkn?c&z@at")
+#define NOM_BDD QString("wimp_bdd")
 
 #include <QtSql>
 
@@ -24,7 +24,10 @@ class Database : public QObject
     Q_PROPERTY(QStringList listeTypes READ getTypes)
 
     //Table animal
-    Q_PROPERTY(QStringList listeAnimaux READ getAnimaux)
+    Q_PROPERTY(QStringList listedatesanimaux READ getDatesanimaux)
+    Q_PROPERTY(QStringList listetypesanimaux READ getTypesanimaux)
+    Q_PROPERTY(QStringList listeAnimaux READ getAnimaux_list)
+    Q_PROPERTY(QString typeanimal READ getTypeanimal)
 
 public:
     Database(QObject *parent = nullptr);
@@ -38,7 +41,9 @@ public:
     Q_INVOKABLE bool creerCompte(QString nom, QString prenom, QString email, QString mdp);
 
     //Table animal
-    Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance, QString idUtilisateur);
+    Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance);
+    Q_INVOKABLE bool animalExist(QString nomAnimal);
+
 
     //Table client
     QString getMail();
@@ -50,8 +55,11 @@ public:
     //Table types
     QStringList getTypes();
 
-    //Tables animal
-    QStringList getAnimaux(QString id_client);
+    //Table animaux
+    QStringList getTypesanimaux();
+    QStringList getDatesanimaux();
+    QStringList getAnimaux_list();
+    QString getTypeanimal();
 
 
 private:
@@ -61,18 +69,26 @@ private:
 
     //Table client
     QString email;
-    QString password;
     QString mail;
+    QString password;
+    QString mdp;
+    int id_client;
     QString name;
     QString lastname;
-    uint idutilisateur;
-    QString mdp;
 
     //Table type
     QStringList listeTypes;
 
     //Table animal
     QStringList listeAnimaux;
+    QStringList listetypesanimaux;
+    QStringList listedatesanimaux;
+    QString nom_Animal;
+    int id_animal;
+    QString date_animal;
+    QString type_animal;
+
+    bool recuperer(QString requete, QStringList &donnees);
 
 public slots:
 };

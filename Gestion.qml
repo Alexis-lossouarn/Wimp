@@ -44,7 +44,7 @@ Item {
                                     id: profil
                                     color: "#707070"
                                     font.pointSize: rectangleHaut.height * 0.3
-                                    text: qsTr("Profil")
+									text: "Profil"
                                     anchors.top: bienvenue.top
                                     anchors.topMargin: bienvenue.height * 0.1
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -86,7 +86,7 @@ Item {
                                         color: "#707070"
                                         font.pointSize: rectangleHaut.height * 0.22
                                         height: 0.8 * profil.height
-                                        text: qsTr("Nom")
+										text: "Nom"
                                         width: prenom.width
                                     }
 
@@ -94,7 +94,7 @@ Item {
                                         id:nom1
                                         height: 0.8 * profil.height
                                         width: grid.width - prenom.width
-										text: Database.name
+                                        text: Database.name
                                         color: "#707070"
                                         font.pointSize: rectangleHaut.height * 0.22
                                         horizontalAlignment: Text.AlignHCenter
@@ -105,7 +105,7 @@ Item {
                                         color: "#707070"
                                         font.pointSize: rectangleHaut.height * 0.22
                                         height: 0.8 * profil.height
-                                        text: qsTr("Prénom")
+										text: "Prénom"
                                     }
 
                                     Text {
@@ -124,7 +124,7 @@ Item {
                                         font.pointSize: rectangleHaut.height * 0.22
                                         height: 0.8 * profil.height
                                         width: prenom.width
-                                        text: qsTr("Mail")
+										text: "Mail"
                                     }
 
                                     Text {
@@ -144,17 +144,16 @@ Item {
                                         font.pointSize: rectangleHaut.height * 0.22
                                         width: prenom.width
                                         height: 2.4 * profil.height
-                                        text: qsTr("
-Avatar")
+										text: "Avatar"
                                     }
 
                                     //Photo de profil arrondie
                                     Rectangle {
-                                        width: 2.4 * profil.height
+										width: 2.4 * profil.height
                                         height: 2.4 * profil.height
                                         color: "transparent"
 
-                                        Rectangle {
+										Rectangle {
                                             id: imageSource
                                             anchors.fill: parent
                                             anchors.rightMargin: - parent.width * 0.25
@@ -176,7 +175,7 @@ Avatar")
                                             anchors.leftMargin: parent.width * 0.25
                                             anchors.rightMargin: - parent.width * 0.25
                                             anchors.bottomMargin: rectangle.top
-                                            radius: parent.width / 2
+											radius: parent.width / 2
                                             color: "red"
                                             border.color: "#707070"
                                             layer.enabled: true
@@ -225,7 +224,7 @@ Avatar")
 
                                     Text {
                                         id: listColliers
-                                        text: qsTr("Liste des colliers")
+										text: "Liste des colliers"
                                         anchors.top: parent.top
                                         anchors.topMargin: 5
                                         color: "#707070"
@@ -244,144 +243,16 @@ Avatar")
                                         color: "#707070"
                                     }
 
-                                    //Grille pour compléter les colliers
-                                    Grid {
-                                        id: grid2
-                                        columns: 1
-                                        spacing: 4
-                                        anchors.top: trait.bottom
-                                        anchors.topMargin: trait.height * 10
-                                        anchors.left: parent.left
-                                        anchors.right: parent.right
-                                        anchors.bottom: rectangle.bottom
-                                        anchors.rightMargin: 5
-                                        anchors.leftMargin: 5
-                                        anchors.bottomMargin: listColliers.height * 1.1
-
-                                        Rectangle {
-                                            id: num1
-                                            border.color: "#707070"
-                                            border.width: 1
-                                            width: grid2.width
-                                            height: text1.height
-
-                                            Text {
-                                                id: text1
-                                                text: qsTr("0685548")
-                                            }
-
-                                            // Bouton croix rouge qui permet de supprimer
-                                            ToolButton {
-                                                width: 0.1 * grid2.width
-                                                height: num1.height * 0.8
-                                                anchors.verticalCenter: parent.verticalCenter
-                                                anchors.right: parent.right
-                                                anchors.rightMargin: 0
-
-                                                background: Image {
-                                                    id: img1
-                                                    source: "supprimer.png"
-                                                }
-                                            }
-                                        }
-
-                                        Rectangle {
-                                            id: num2
-                                            border.color: "#707070"
-                                            border.width: 1
-                                            anchors.top: num1.bottom
-                                            anchors.topMargin: 0
-                                            width: grid2.width
-                                            height: text1.height
-
-                                            Text {
-                                                id: text2
-                                                text: qsTr("5227537")
-                                            }
-
-                                            // Bouton croix rouge qui permet de supprimer
-                                            ToolButton {
-                                                width: 0.1 * grid2.width
-                                                height: num1.height * 0.8
-                                                anchors.verticalCenter: parent.verticalCenter
-                                                anchors.right: parent.right
-                                                anchors.rightMargin: 0
-
-                                                background: Image {
-                                                    id: img2
-                                                    source: "supprimer.png"
-                                                }
-                                            }
-                                        }
-
-                                        Rectangle {
-                                            id: num3
-                                            border.color: "#707070"
-                                            border.width: 1
-                                            anchors.top: num2.bottom
-                                            anchors.topMargin: 0
-                                            width: grid2.width
-                                            height: text1.height
-
-                                            Text {
-                                                id: text3
-                                                text: qsTr("0645235")
-                                            }
-
-                                            // Bouton croix rouge qui permet de supprimer
-                                            ToolButton {
-                                                width: 0.1 * grid2.width
-                                                height: num1.height * 0.8
-                                                anchors.verticalCenter: parent.verticalCenter
-                                                anchors.right: parent.right
-                                                anchors.rightMargin: 0
-
-                                                background: Image {
-                                                    id: img3
-                                                    source: "supprimer.png"
-                                                }
-                                            }
-                                        }
-
-                                        Rectangle {
-                                            id: num4
-                                            border.color: "#707070"
-                                            border.width: 1
-                                            anchors.top: num3.bottom
-                                            anchors.topMargin: 0
-                                            width: grid2.width
-                                            height: text1.height
-
-                                            Text {
-                                                id: text4
-                                                text: qsTr("1049823")
-                                            }
-
-                                            // Bouton croix rouge qui permet de supprimer
-                                            ToolButton {
-                                                width: 0.1 * grid2.width
-                                                height: num1.height * 0.8
-                                                anchors.verticalCenter: parent.verticalCenter
-                                                anchors.right: parent.right
-                                                anchors.rightMargin: 0
-
-                                                background: Image {
-                                                    id: img4
-                                                    source: "supprimer.png"
-                                                }
-                                            }
-                                        }
-                                    }
-
                                     Button {
                                         id: ajouter
-                                        anchors.top: grid2.bottom
-                                        width : grid2.width
-                                        anchors.left: parent.left
+										anchors.left: rectangle.left
+										anchors.right: rectangle.right
+										anchors.rightMargin: 5
                                         anchors.bottom: rectangle.bottom
                                         anchors.bottomMargin: 5
                                         anchors.leftMargin: 5
-                                        text: qsTr("Ajouter")
+										text: "Ajouter"
+										height: listColliers.height
 
                                         background: Rectangle {
                                             color: "#2CC71A"
@@ -396,7 +267,7 @@ Avatar")
 
                                         onClicked: {
                                             //ouvrir la page Ajoutanimal
-                                            stackView.push("Ajoutanimal.qml")
+											stackView.push("Colliers.qml")
                                         }
 
                                     }
@@ -404,12 +275,11 @@ Avatar")
 
                                 Button {
                                        id: modifier
-                                       width: ajouter.width * 0.7
-                                       text: qsTr("Modifier")
+									   text: "Modifier"
                                        anchors.top: rectangle.bottom
-                                       anchors.topMargin: (5 + ajouter.height) / 2
+									   anchors.topMargin: (5 + ajouter.height) / 8
                                        anchors.horizontalCenter: parent.horizontalCenter
-                                       height: ajouter.height * 2
+									   height: ajouter.height * 2
 
                                        contentItem: Text {
                                            text: modifier.text
@@ -452,7 +322,7 @@ Avatar")
 
                             Button {
                                 id:gestioncompte
-                                text: qsTr("Carte")
+								text: "Carte"
                                 width: 0.8 * parametre.width
                                 height: 0.06 * parent.height
                                 anchors.top: parent.top
@@ -487,7 +357,7 @@ Avatar")
 
                             Button {
                                 id:deco
-                                text: qsTr("Deconnexion")
+								text: "Deconnexion"
                                 width: 0.8 * parametre.width
                                 height: 0.06 * parent.height
                                 anchors.top: gestioncompte.top
@@ -514,6 +384,7 @@ Avatar")
 
                                 onClicked: {
                                     //ouvrir la page d'accueil
+									Database.deconnexion()
                                     stackView.push("Accueil.qml")
                                     //fermer le drawer après l'actionnement
                                     parametre.close()
@@ -547,7 +418,7 @@ Avatar")
 
                             Text {
                                 id: vmoytxt
-                                text: qsTr("Vitesse moyenne")
+								text: "Vitesse moyenne"
                                 color: "#ffffff"
                                 width: parametre.width
                                 horizontalAlignment: Text.AlignHCenter
@@ -568,7 +439,7 @@ Avatar")
 
                             Text {
                                 id: vactutxt
-                                text: qsTr("Vitesse Actuelle")
+								text: "Vitesse Actuelle"
                                 color: "#ffffff"
                                 width: parametre.width
                                 horizontalAlignment: Text.AlignHCenter
@@ -585,29 +456,6 @@ Avatar")
                                 anchors.topMargin: (0.07 * parent.height) * 0.25
                                 anchors.horizontalCenter: parent.horizontalCenter
                                 radius: 11
-                            }
-
-                            ToolButton {
-                                id: retrouver
-                                width: vactu.width
-                                height: vactu.height
-                                anchors.bottom: parent.bottom
-                                anchors.bottomMargin: 0.02 * parent.height
-                                anchors.horizontalCenter: parent.horizontalCenter
-
-                                background: Rectangle {
-                                radius: 11
-                                color: "#EB5B5B"
-                                }
-
-                                contentItem: Text {
-                                    id: retrouvertxt
-                                    text: qsTr("Retrouver")
-                                    color: "#ffffff"
-                                    horizontalAlignment: Text.AlignHCenter
-                                    verticalAlignment: Text.AlignVCenter
-                                    font.pixelSize: deco.height * 0.5
-                                }
                             }
                         }
                     }
@@ -648,7 +496,7 @@ Avatar")
                                     id: listAnimauxtxt
                                     color: "#707070"
                                     font.pointSize: rectangleHaut.height * 0.3
-                                    text: qsTr("Liste des animaux")
+									text: "Liste des animaux"
                                     anchors.top: bienvenuep2.top
                                     anchors.topMargin: bienvenuep2.height * 0.1
                                     anchors.horizontalCenter: parent.horizontalCenter
@@ -671,155 +519,44 @@ Avatar")
                                         //ouvrir le drawer paramètre de la page 2
                                         parametrep2.open()
                                     }
+								}
+
+                                Rectangle {
+									id: rectangleanimal
+									anchors.top: listAnimauxtxt.bottom
+									anchors.topMargin: 20
+									width: parent.width
+									anchors.horizontalCenter: parent.horizontalCenter
+									anchors.bottom: ajouterp2.top
+									anchors.bottomMargin: 10
+									border.color: "#707070"
+
+									Row {
+										ListView {
+											id: resultats
+											width: parent.width
+											height: parent.height
+											focus: true
+											snapMode: ListView.SnapOneItem
+											highlightRangeMode: ListView.StrictlyEnforceRange
+											highlightMoveDuration: 250
+											orientation: ListView.Horizontal
+											boundsBehavior: Flickable.StopAtBounds
+											model: Listeanimaux {}
+											delegate: Loader {
+												width: resultats.width
+												height: resultats.height
+												source: component
+												asynchronous: true
+											}
+										}
+									}
                                 }
-
-
-                                    Rectangle {
-                                        id: animal1
-                                        border.color: "#707070"
-                                        border.width: 1
-                                        width: bienvenuep2.width * 0.9
-                                        height: listAnimauxtxt.height
-                                        anchors.top: listAnimauxtxt.bottom
-                                        anchors.topMargin: listAnimauxtxt.height * 0.5
-                                        anchors.horizontalCenter: parent.horizontalCenter
-
-                                        Text {
-                                            id: textanimal1
-                                            text: qsTr("Chien 1")
-                                            color: "#707070"
-                                            width: 0.6 * animal1.width
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.left: parent.left
-                                            anchors.leftMargin: 5
-                                        }
-
-                                        //Bouton modifier
-                                        ToolButton {
-                                            width: 0.2 * animal1.width
-                                            anchors.left: textanimal1.right
-                                            height: animal1.height * 0.6
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: modifier1
-                                                source: "modifier.png"
-                                            }
-                                        }
-
-                                        //Bouton supprimer
-                                        Button {
-                                            width: 0.15 * animal1.width - 1
-                                            anchors.right: animal1.right
-                                            anchors.rightMargin: 1
-                                            height: animal1.height * 0.8
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: supp1
-                                                source: "supprimer.png"
-                                            }
-                                        }
-                                    }
-
-                                    Rectangle {
-                                        id: animal2
-                                        border.color: "#707070"
-                                        border.width: 1
-                                        width: bienvenuep2.width * 0.9
-                                        height: listAnimauxtxt.height
-                                        anchors.top: animal1.bottom
-                                        anchors.horizontalCenter: parent.horizontalCenter
-
-                                        Text {
-                                            id: textanimal2
-                                            text: qsTr("Chien 2")
-                                            color: "#707070"
-                                            width: 0.6 * animal1.width
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.left: parent.left
-                                            anchors.leftMargin: 5
-                                        }
-
-                                        //Bouton modifier
-                                        ToolButton {
-                                            width: 0.2 * animal1.width
-                                            anchors.left: textanimal2.right
-                                            height: animal1.height * 0.6
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: modifier2
-                                                source: "modifier.png"
-                                            }
-                                        }
-
-                                        //Bouton supprimer
-                                        Button {
-                                            width: 0.15 * animal1.width - 1
-                                            anchors.right: animal2.right
-                                            anchors.rightMargin: 1
-                                            height: animal1.height * 0.8
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: supp2
-                                                source: "supprimer.png"
-                                            }
-                                        }
-                                    }
-
-                                    Rectangle {
-                                        id: animal3
-                                        border.color: "#707070"
-                                        border.width: 1
-                                        width: bienvenuep2.width * 0.9
-                                        height: listAnimauxtxt.height
-                                        anchors.top: animal2.bottom
-                                        anchors.horizontalCenter: parent.horizontalCenter
-
-                                        Text {
-                                            id: textanimal3
-                                            text: qsTr("Chat 1")
-                                            color: "#707070"
-                                            width: 0.6 * animal1.width
-                                            anchors.verticalCenter: parent.verticalCenter
-                                            anchors.left: parent.left
-                                            anchors.leftMargin: 5
-                                        }
-
-                                        //Bouton modifier
-                                        ToolButton {
-                                            width: 0.2 * animal1.width
-                                            anchors.left: textanimal3.right
-                                            height: animal1.height * 0.6
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: modifier3
-                                                source: "modifier.png"
-                                            }
-                                        }
-
-                                        //Bouton supprimer
-                                        Button {
-                                            width: 0.15 * animal1.width - 1
-                                            anchors.right: animal3.right
-                                            anchors.rightMargin: 1
-                                            height: animal1.height * 0.8
-                                            anchors.verticalCenter: parent.verticalCenter
-
-                                            background: Image {
-                                                id: supp3
-                                                source: "supprimer.png"
-                                            }
-                                        }
-                                    }
 
                                 Button {
                                        id: ajouterp2
                                        width: modifier.width
-                                       text: qsTr("Ajouter")
+									   text: "Ajouter"
                                        height: modifier.height
                                        anchors.bottom: parent.bottom
                                        anchors.bottomMargin: (5 + ajouter.height) / 2
@@ -867,7 +604,7 @@ Avatar")
 
                         Button {
                             id:gestioncomptep2
-                            text: qsTr("Carte")
+							text: "Carte"
                             width: 0.8 * parametrep2.width
                             height: 0.06 * parent.height
                             anchors.top: parent.top
@@ -900,7 +637,7 @@ Avatar")
 
                         Button {
                             id:decop2
-                            text: qsTr("Deconnexion")
+							text: "Deconnexion"
                             width: 0.8 * parametrep2.width
                             height: 0.06 * parent.height
                             anchors.top: gestioncomptep2.top
@@ -926,6 +663,7 @@ Avatar")
                             }
 
                             onClicked: {
+								Database.deconnexion()
                                 stackView.push("Accueil.qml")
                                 parametrep2.close()
                             }
@@ -957,7 +695,7 @@ Avatar")
 
                         Text {
                             id: vmoytxtp2
-                            text: qsTr("Vitesse moyenne")
+							text: "Vitesse moyenne"
                             color: "#ffffff"
                             width: parametrep2.width
                             horizontalAlignment: Text.AlignHCenter
@@ -978,7 +716,7 @@ Avatar")
 
                         Text {
                             id: vactutxtp2
-                            text: qsTr("Vitesse Actuelle")
+							text: "Vitesse Actuelle"
                             color: "#ffffff"
                             width: parametrep2.width
                             horizontalAlignment: Text.AlignHCenter
@@ -996,34 +734,10 @@ Avatar")
                             anchors.horizontalCenter: parent.horizontalCenter
                             radius: 11
                         }
-
-                        ToolButton {
-                            id: retrouverp2
-                            width: vactup2.width
-                            height: vactup2.height
-                            anchors.bottom: parent.bottom
-                            anchors.bottomMargin: 0.02 * parent.height
-                            anchors.horizontalCenter: parent.horizontalCenter
-
-                            background: Rectangle {
-                            radius: 11
-                            color: "#EB5B5B"
-                            }
-
-                            contentItem: Text {
-                                id: retrouvertxtp2
-                                text: qsTr("Retrouver")
-                                color: "#ffffff"
-                                horizontalAlignment: Text.AlignHCenter
-                                verticalAlignment: Text.AlignVCenter
-                                font.pixelSize: decop2.height * 0.5
-                            }
-                        }
                     }
                 }
-
-                }
-            }
+			}
+	   }
 
             //rond qui permettent de voir sur quelle page on est
     PageIndicator {

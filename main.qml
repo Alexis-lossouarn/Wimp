@@ -7,7 +7,7 @@ ApplicationWindow {
     width: 287
     height: 614
     visible: true
-    title: qsTr("Stack")
+	title: "Wimp"
 
     //rectangle du haut avec les logos qui sera le même pour toutes les pages
     header: Rectangle {
@@ -22,7 +22,7 @@ ApplicationWindow {
 
             Text {
                 id: wimpLogo
-                text: qsTr("WIMP")
+				text: "WIMP"
                 anchors.verticalCenter: parent.verticalCenter
                 font.family: "Poor Richard"
                 font.pointSize: rectangleHaut.height * 0.4

@@ -29,7 +29,7 @@ Item {
                 //bouton retour
                 Button {
                        id: retour
-                       text: qsTr("retour")
+					   text: "retour"
                        anchors.top: bienvenue.top
                        anchors.rightMargin: 0
                        anchors.right: column.right
@@ -63,7 +63,7 @@ Item {
                 Text {
                     id: textAccueil
                     color: "#707070"
-                    text: qsTr("Inscrivez-vous")
+					text: "Inscrivez-vous"
                     anchors.top: parent.top
                     anchors.topMargin: parent.width * 0.15
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -74,7 +74,7 @@ Item {
 				Text {
 					id: textnom
 					color: "#707070"
-					text: qsTr("Nom")
+					text: "Nom"
 					anchors.top: textAccueil.top
 					anchors.topMargin: parent.width * 0.2
 					anchors.horizontalCenter: parent.horizontalCenter
@@ -109,7 +109,7 @@ Item {
                 Text {
 					id: textprenom
                     color: "#707070"
-					text: qsTr("Prenom")
+					text: "Prenom"
 					anchors.top: nomRectangle.top
 					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -144,7 +144,7 @@ Item {
                 Text {
 					id: textmail
                     color: "#707070"
-					text: qsTr("Adresse Mail")
+					text: "Adresse Mail"
 					anchors.top: prenomRectangle.top
 					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -179,7 +179,7 @@ Item {
                 Text {
 					id: textmdp
                     color: "#707070"
-					text: qsTr("Mot de passe")
+					text: "Mot de passe"
 					anchors.top: mailRectangle.top
 					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -214,7 +214,7 @@ Item {
                 Text {
 					id: textmdp2
                     color: "#707070"
-					text: qsTr("Valider mot de passe")
+					text: "Valider mot de passe"
 					anchors.top: mdpRectangle.top
 					anchors.topMargin: parent.width * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -249,7 +249,7 @@ Item {
                 Button {
                        id: envoyer
                        width: 90
-                       text: qsTr("Envoyer")
+					   text: "Envoyer"
 					   anchors.top: mdp2Rectangle.bottom
 					   anchors.topMargin: mdp2Rectangle.height
                        anchors.horizontalCenter: parent.horizontalCenter
@@ -300,7 +300,7 @@ Item {
             id: mentionLegales
             height: 32
             opacity: 1
-            text: qsTr("Mention légales")
+			text: "Mention légales"
             anchors.bottom: parent.bottom
             clip: false
             anchors.horizontalCenter: parent.horizontalCenter

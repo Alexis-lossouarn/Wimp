@@ -1,6 +1,6 @@
 #include "animaux.h"
 
-Animaux::Animaux(uint id_animal, QString nom, QDate naissance_animal, QString type_animal, uint distance, uint id_collier, uint id_utilisateur, QObject *parent)
+Animaux::Animaux(QString nom_animal, QString naissance_animal, QString type_animal, double distance, uint id_collier, QObject *parent)
 {
 }
 
@@ -11,7 +11,7 @@ uint Animaux::getId_animal() const
 
 QString Animaux::getNom_animal() const
 {
-    return nom;
+    return nom_animal;
 }
 
 QString Animaux::getNaissance_animal() const
@@ -24,7 +24,7 @@ QString Animaux::getType_animal() const
     return type_animal;
 }
 
-uint Animaux::getDistance_animal() const
+double Animaux::getDistance_animal() const
 {
     return distance;
 }

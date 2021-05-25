@@ -27,7 +27,7 @@ Item {
 
                 Button {
                        id: retour
-                       text: qsTr("retour")
+					   text: "retour"
                        anchors.top: bienvenue.top
                        anchors.right: column.right
                        width: textAccueil.width * 0.4
@@ -59,7 +59,7 @@ Item {
                 Text {
                     id: textAccueil
                     color: "#707070"
-                    text: qsTr("Connectez-vous")
+					text: "Connectez-vous"
                     anchors.top: parent.top
                     anchors.topMargin: parent.width * 0.3
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -70,7 +70,7 @@ Item {
                 Text {
 					   id: connexion
                        color: "#707070"
-					   text: qsTr("Email")
+					   text: "Email"
                        anchors.top: textAccueil.bottom
                        anchors.horizontalCenter: parent.horizontalCenter
                        anchors.topMargin: parent.width * 0.2
@@ -105,7 +105,7 @@ Item {
                 Text {
                        id: mdp
                        color: "#707070"
-                       text: qsTr("Mot de passe")
+					   text: "Mot de passe"
                        anchors.top: connexionRectangle.bottom
                        anchors.horizontalCenter: parent.horizontalCenter
                        anchors.topMargin: parent.width * 0.15
@@ -139,7 +139,7 @@ Item {
 
                 Button{
                     id: envoyer
-                    text: qsTr("Envoyer")
+					text: "Envoyer"
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: parent.width * 0.3
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -183,7 +183,7 @@ Item {
             id: mentionLegales
             height: 32
             opacity: 1
-            text: qsTr("Mention légales")
+			text: "Mention légales"
             anchors.bottom: parent.bottom
             clip: false
             anchors.horizontalCenter: parent.horizontalCenter

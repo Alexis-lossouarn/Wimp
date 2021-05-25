@@ -31,7 +31,7 @@ Item {
                 Text {
                     id: textAccueil
                     color: "#707070"
-                    text: qsTr("Bienvenue")
+					text: "Bienvenue"
                     anchors.top: parent.top
                     anchors.topMargin: parent.width * 0.3
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -41,7 +41,7 @@ Item {
 
                 Button {
                        id: connexion
-                       text: qsTr("Connexion")
+					   text: "Connexion"
                        anchors.top: textAccueil.bottom
                        anchors.horizontalCenter: parent.horizontalCenter
                        anchors.topMargin: parent.width * 0.3
@@ -73,7 +73,7 @@ Item {
 
                 Button{
                     id: inscription
-                    text: qsTr("Inscription")
+					text: "Inscription"
                     anchors.top: connexion.bottom
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.topMargin: parent.width * 0.3
@@ -110,7 +110,7 @@ Item {
             id: mentionLegales
             height: 32
             opacity: 1
-            text: qsTr("Mention légales")
+			text: "Mention légales"
             anchors.bottom: parent.bottom
             clip: false
             anchors.horizontalCenter: parent.horizontalCenter

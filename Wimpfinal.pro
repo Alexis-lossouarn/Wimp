@@ -1,4 +1,4 @@
-QT += widgets quick quickcontrols2 sql charts core location
+QT += widgets quick quickcontrols2 sql core location
 
 CONFIG += c++11
 
@@ -35,7 +35,6 @@ HEADERS += \
     database.h \
     gps.h \
     types.h
-
 ANDROID_ABIS = armeabi-v7a
 
 DISTFILES += \

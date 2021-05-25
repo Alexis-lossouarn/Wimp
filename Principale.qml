@@ -8,6 +8,7 @@ import QtLocation 5.12
 
 
 Item {
+	id:window
 
     Rectangle {
         id: rectangleMilieu
@@ -26,7 +27,7 @@ Item {
                 height: rectangleMilieu.height * 0.5
 
                 Rectangle {
-                    id: animalobserve
+					id: animalobserve
                     width: 0.7 * parent.width
                     height: row1Milieu.height * 0.5
                     radius: 15
@@ -37,41 +38,53 @@ Item {
                     anchors.bottomMargin: animalobserve.height * 0.2
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    ToolButton {
-                        id: choixAnimal
-                        height: fleche.height
+                    ComboBox {
+						id: choixAnimal
+                        model: Database.listeAnimaux
+                        height: animalobserve.height * 0.95
                         opacity: 0.5
-                        width: fleche.width
+                        width: animalobserve.width * .9
                         anchors.right: animalobserve.right
-                        anchors.rightMargin: 6
-                        flat: false
-                        highlighted: false
-                        display: AbstractButton.TextBesideIcon
+                        anchors.rightMargin: 0
                         clip: false
                         anchors.verticalCenter: parent.verticalCenter
-                        onClicked: {
-                            //ouvre le menu de choix de l'animal
-                            choixtypeanimal.open()
+                        anchors.horizontalCenter: animalobserve.horizontalCenter
+
+                        background: Rectangle {
+                            color: "transparent"
                         }
 
-                        Image {
-                            id: fleche
+                        indicator: Image {
+                            id: flechegris
                             source: "fleche.png"
+                            anchors.right: choixAnimal.right
+                            anchors.rightMargin: 3
+                            anchors.verticalCenter: choixAnimal.verticalCenter
                         }
-                    }
 
-                    Text {
-                        id: nomAnimal
-                        text: qsTr("Animal observé")
-                        anchors.verticalCenter: parent.verticalCenter
-                        font.pixelSize: animalobserve.height * 0.5
-                        font.family: "Segoe UI"
-                        anchors.leftMargin: 5
-                        width: (9/10) * animalobserve.width
-                        color: "#707070"
-                        anchors.left: animalobserve.left
-                    }
+                        popup: Popup {
+							id:animalpopup
+                                y: choixAnimal.height * 0.8
+                                x: choixAnimal.width * 0.05
+                                width: choixAnimal.width * .9
+                                height: choixAnimal.height * 3
+                                implicitHeight: contentItem.implicitHeight
+                                padding: 1
 
+                                contentItem: ListView {
+									id: animalchange
+                                    clip: true
+                                    onCurrentItemChanged: Database.animalExist(choixAnimal.currentText)
+                                    implicitHeight: contentHeight
+                                    ScrollIndicator.vertical: ScrollIndicator {}
+                                    model: choixAnimal.popup.visible ? choixAnimal.delegateModel : null
+                                }
+
+                                background: Rectangle {
+                                    radius: 0
+                                }
+                            }
+                    }
                 }
             }
 
@@ -95,8 +108,8 @@ Item {
                     anchors.leftMargin: parent.width / (25/1.5)
 
                     Text {
-                        id: typedelanimal
-                        text: qsTr("Type de l'animal")
+						id: typedelanimal
+						text: animalchange.currentItem.containmentMaskChanged() ? "Type" : Database.typeanimal
                         width: rectangleTypeanimal.width
                         color: "#ffffff"
                         anchors.verticalCenter: parent.verticalCenter
@@ -120,8 +133,8 @@ Item {
 
                     Text {
                         id: ageanimal
-                        text: qsTr("Age")
-                        anchors.verticalCenter: parent.verticalCenter
+						text: animalchange.currentItem.containmentMaskChanged() ? "Âge" : Database.ageanimal
+						anchors.verticalCenter: parent.verticalCenter
                         width: rectangleAgeanimal.width
                         color: "#ffffff"
                         anchors.right: parent.right
@@ -149,7 +162,7 @@ Item {
 
                     Text {
                         id: textecalendrier
-                        text : (monthPicker.month == 0 || monthPicker2.month == 0 ) ? qsTr("Période à observer") : qsTr("du "+yearPicker.year+"/"+monthPicker.month+"/"+dayPicker.day+" à "+hourPicker.hour+"h"+minutePicker.minute+" jusqu'au "+yearPicker2.year+"/"+monthPicker2.month+"/"+dayPicker2.day+" à "+hourPicker2.hour+"h"+minutePicker2.minute)
+						text : (monthPicker.month == 0 || monthPicker2.month == 0 ) ? "Période à observer" : "du "+yearPicker.year+"/"+monthPicker.month+"/"+dayPicker.day+" à "+hourPicker.hour+"h"+minutePicker.minute+" jusqu'au "+yearPicker2.year+"/"+monthPicker2.month+"/"+dayPicker2.day+" à "+hourPicker2.hour+"h"+minutePicker2.minute
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         width: rectangleCalendrier.width * 0.8
@@ -214,12 +227,12 @@ Item {
     }
 
     // Rectangle qui correspond à la carte Open Street
-	Rectangle {
-		id: rectangleBas
+	Image {
+		id: name
+		source: "wtf.jpg"
+		width: parent.width
+		anchors.bottom: window.bottom
 		anchors.top: rectangleMilieu.bottom
-		width: window.width
-		height: window.height * 0.6
-		color: "black"
 	}
 
     //les paramètres :
@@ -237,7 +250,7 @@ Item {
 
             Button {
                 id:gestioncompte
-                text: qsTr("Gestion du compte")
+				text: "Gestion du compte"
                 width: 0.8 * parametre.width
                 height: 0.06 * parent.height
                 anchors.top: parent.top
@@ -265,6 +278,7 @@ Item {
                 onClicked: {
                     //Ouvre la page Gestion
                     stackView.push("Gestion.qml")
+					Database.lireAnimal()
                     //Ferme les paramètres dès l'actionnement du bouton
                     parametre.close()
                 }
@@ -272,7 +286,7 @@ Item {
 
             Button {
                 id:deco
-                text: qsTr("Deconnexion")
+				text: "Deconnexion"
                 width: 0.8 * parametre.width
                 height: 0.06 * parent.height
                 anchors.top: gestioncompte.top
@@ -299,9 +313,10 @@ Item {
 
                 onClicked: {
                     //Ouvre la page Accueil
-                    stackView.push("Accueil.qml")
+					Database.deconnexion()
+                    stackView.push("Accueil.qml")					
                     //Ferme les paramètres dès l'actionnement du bouton
-                    parametre.close()
+					parametre.close()
                 }
             }
 
@@ -332,7 +347,7 @@ Item {
 
             Text {
                 id: vmoytxt
-                text: qsTr("Vitesse moyenne")
+				text: "Vitesse moyenne"
                 color: "#ffffff"
                 width: parametre.width
                 horizontalAlignment: Text.AlignHCenter
@@ -353,7 +368,7 @@ Item {
 
             Text {
                 id: vactutxt
-                text: qsTr("Vitesse Actuelle")
+				text: "Vitesse Actuelle"
                 color: "#ffffff"
                 width: parametre.width
                 horizontalAlignment: Text.AlignHCenter
@@ -371,137 +386,8 @@ Item {
                 anchors.horizontalCenter: parent.horizontalCenter
                 radius: 11
             }
-
-            ToolButton {
-                id: retrouver
-                width: vactu.width
-                height: vactu.height
-                anchors.bottom: parent.bottom
-                anchors.bottomMargin: 0.02 * parent.height
-                anchors.horizontalCenter: parent.horizontalCenter
-
-                background: Rectangle {
-                radius: 11
-                color: "#EB5B5B"
-                }
-
-                contentItem: Text {
-                    id: retrouvertxt
-                    text: qsTr("Retrouver")
-                    color: "#ffffff"
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                    font.pixelSize: deco.height * 0.5
-                }
-            }
         }
     }
-
-    //Liste du choix des animaux
-    Menu {
-		id: choixtypeanimal
-        leftMargin: parent.width * 0.15
-        y: rectangleTypeanimal.height * 1.98
-        width: animalobserve.width
-
-		ScrollView {
-			height: typedelanimal.height * 9
-			clip: true
-			ScrollBar.horizontal: ScrollBar.AlwaysOff
-			ScrollBar.vertical.policy: ScrollBar.AlwaysOn
-
-			Rectangle {
-				id:animal1
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal1
-					text: qsTr("Type 1")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-
-			Rectangle {
-				id:animal2
-				anchors.top: animal1.bottom
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal2
-					text: qsTr("Type 2")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-
-			Rectangle {
-				id:animal3
-				anchors.top: animal2.bottom
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal3
-					text: qsTr("Type 3")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-
-			Rectangle {
-				id:animal4
-				anchors.top: animal3.bottom
-				width :choixtypeanimal.availableWidth
-				height: row3Milieu.height
-				border.color: "#707070"
-				border.width: 1
-				color: "#ffffff"
-
-				Text {
-					id: typeAnimal4
-					text: qsTr("Type 4")
-					anchors.verticalCenter: parent.verticalCenter
-					width: rectangleTypeanimal.width
-					anchors.right: parent.right
-					font.pixelSize: typedelanimal.height
-					font.family: "Segoe UI"
-					horizontalAlignment: Text.AlignHCenter
-					anchors.horizontalCenter: parent.horizontalCenter
-					color: "#707070"
-				}
-			}
-		}
-	}
 
     //Calendrier pour sélectionner les dates
     Menu {
@@ -512,7 +398,7 @@ Item {
 
         Text {
             id: textdate1
-            text: qsTr("A partir du :")
+			text: "A partir du :"
             height: 0.2 * menuCalendrier.height
             width: menuCalendrier.width
             anchors.top: menuCalendrier.Top
@@ -528,14 +414,14 @@ Item {
 
             Text {
                 id: textAnnee1
-                text: qsTr("Année")
+				text: "Année"
                 width: yearPicker.width
                 horizontalAlignment: Text.AlignHCenter
             }
 
             Text {
                 id: textMois1
-                text: qsTr("Mois")
+				text: "Mois"
                 anchors.left: textAnnee1.right
                 width: monthPicker.width
                 horizontalAlignment: Text.AlignHCenter
@@ -543,7 +429,7 @@ Item {
 
             Text {
                 id: textJour1
-                text: qsTr("Jour")
+				text: "Jour"
                 anchors.left: textMois1.right
                 width: dayPicker.width
                 horizontalAlignment: Text.AlignHCenter
@@ -551,7 +437,7 @@ Item {
 
             Text {
                 id: textHeure1
-                text: qsTr("Heure")
+				text: "Heure"
                 anchors.left: textJour1.right
                 width: hourPicker.width
                 horizontalAlignment: Text.AlignHCenter
@@ -559,7 +445,7 @@ Item {
 
             Text {
                 id: textMinute1
-                text: qsTr("Minutes")
+				text: "Minutes"
                 anchors.left: textHeure1.right
                 width: minutePicker.width
                 horizontalAlignment: Text.AlignHCenter
@@ -683,7 +569,7 @@ Item {
         Button {
            id: okButton
            width: minutePicker.width
-           text: qsTr("OK")
+		   text: "OK"
            height: textMinute1.height * 1.5
            anchors.left: hourPicker.right
            anchors.top: minutePicker.bottom
@@ -729,7 +615,7 @@ Item {
 
         Text {
             id: textdate2
-            text: qsTr("Jusqu'au :")
+			text: "Jusqu'au :"
             height: 0.2 * menuCalendrier.height
             width: menuCalendrier2.width
             anchors.top: menuCalendrier2.Top
@@ -745,14 +631,14 @@ Item {
 
             Text {
                 id: textAnnee2
-                text: qsTr("Année")
+				text: "Année"
                 width: yearPicker2.width
                 horizontalAlignment: Text.AlignHCenter
             }
 
             Text {
                 id: textMois2
-                text: qsTr("Mois")
+				text: "Mois"
                 anchors.left: textAnnee2.right
                 width: monthPicker2.width
                 horizontalAlignment: Text.AlignHCenter
@@ -760,7 +646,7 @@ Item {
 
             Text {
                 id: textJour2
-                text: qsTr("Jour")
+				text: "Jour"
                 anchors.left: textMois2.right
                 width: dayPicker2.width
                 horizontalAlignment: Text.AlignHCenter
@@ -768,7 +654,7 @@ Item {
 
             Text {
                 id: textHeure2
-                text: qsTr("Heure")
+				text: "Heure"
                 anchors.left: textJour2.right
                 width: hourPicker2.width
                 horizontalAlignment: Text.AlignHCenter
@@ -776,7 +662,7 @@ Item {
 
             Text {
                 id: textMinute2
-                text: qsTr("Minutes")
+				text: "Minutes"
                 anchors.left: textHeure2.right
                 width: minutePicker2.width
                 horizontalAlignment: Text.AlignHCenter
@@ -900,7 +786,7 @@ Item {
         Button {
            id: okButton2
            width: minutePicker2.width
-           text: qsTr("OK")
+		   text: "OK"
            height: textMinute2.height * 1.5
            anchors.left: hourPicker2.right
            anchors.top: minutePicker2.bottom
@@ -927,7 +813,7 @@ Item {
                    console.log("Choissisez un mois non nul")
                }
 
-               else if (yearPicker2.year < yearPicker.year){
+			   else if (yearPicker2.year > yearPicker.year){
                    console.log("Choissisez une année au moin aussi grande que celle précédente")
                }
 

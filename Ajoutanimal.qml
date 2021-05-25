@@ -26,7 +26,7 @@ Item {
                 id: profil
                 color: "#707070"
                 font.pointSize: rectangleHaut.height * 0.3
-                text: qsTr("Ajouter un animal")
+				text: "Ajouter un animal"
                 anchors.top: bienvenue.top
                 anchors.topMargin: bienvenue.height * 0.1
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -41,7 +41,7 @@ Item {
                 color: "#707070"
                 font.pointSize: rectangleHaut.height * 0.22
                 height: 0.8 * profil.height
-                text: qsTr("Nom de L'animal")
+				text: "Nom de L'animal"
                 width: bienvenue.width
             }
 
@@ -79,7 +79,7 @@ Item {
                 color: "#707070"
                 font.pointSize: rectangleHaut.height * 0.22
                 height: 0.8 * profil.height
-                text: qsTr("Année de naissance")
+				text: "Année de naissance"
                 width: bienvenue.width
             }
 
@@ -98,7 +98,7 @@ Item {
                 Text {
                     id: anneeanimalInput
                     width: anneeanimalRectangle * 0.9
-                    text: (monthPicker3.month == 0) ? qsTr("") : qsTr("Né le : "+dayPicker3.day+"/"+monthPicker3.month+"/"+yearPicker3.year)
+					text: (monthPicker3.month == 0) ? "" : "Né le : "+dayPicker3.day+"/"+monthPicker3.month+"/"+yearPicker3.year
                     height: anneeanimal.height
                     anchors.horizontalCenter: anneeanimalRectangle.horizontalCenter
                     anchors.verticalCenter: anneeanimalRectangle.verticalCenter
@@ -118,7 +118,8 @@ Item {
                     anchors.verticalCenter: anneeanimalRectangle.verticalCenter
 
                     background: Image {
-                    source: "flecheor.png"
+                        id :flecheor
+                        source: "flecheor.png"
                     }
 
                     onClicked: {
@@ -137,7 +138,7 @@ Item {
                 color: "#707070"
                 font.pointSize: rectangleHaut.height * 0.22
                 height: 0.8 * profil.height
-                text: qsTr("Type de l'animal")
+				text: "Type de l'animal"
                 width: bienvenue.width
             }
 
@@ -155,6 +156,16 @@ Item {
 					border.color: "#707070"
 					border.width: 1
 				}
+
+                indicator: Image {
+                    id: flechegris
+                    source: "fleche.png"
+                    width: flecheor.width *.9
+                    height: flecheor.height
+                    anchors.right: typeanimalRectangle.right
+                    anchors.rightMargin: 5
+                    anchors.verticalCenter: typeanimalRectangle.verticalCenter
+                }
 			}
 
             Text {
@@ -165,7 +176,7 @@ Item {
                 color: "#707070"
                 font.pointSize: rectangleHaut.height * 0.22
                 height: 0.8 * profil.height
-                text: qsTr("Distance Maximale")
+				text: "Distance Maximale"
                 anchors.right: bienvenue.right
                 anchors.rightMargin: 0.25 * bienvenue.width
                 anchors.left: bienvenue.left
@@ -191,7 +202,7 @@ Item {
                     width: sliderdistance.width
                     height: sliderdistance.height
                     radius: 7
-                    border.color: "transparent"
+					border.color: "transparent"
                     color: "transparent"
                     anchors.left: sliderdistance.left
                     anchors.leftMargin: (sliderdistance.value < 275) ? backgroundslider.width / 28 : - backgroundslider.width / 56
@@ -206,7 +217,7 @@ Item {
                 }
 
                 contentItem: Text {
-                    text: sliderdistance.value + qsTr("m")
+					text: sliderdistance.value + "m"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
 
@@ -215,55 +226,19 @@ Item {
 
             }
 
-            Text {
-                id: colliertxt
-                text: qsTr("N° série du Collier")
-                horizontalAlignment: Text.AlignHCenter
-                anchors.top: sliderdistance.bottom
-                anchors.topMargin: profil.height * 0.5
-                color: "#707070"
-                font.pointSize: rectangleHaut.height * 0.22
-                height: 0.8 * profil.height
-                width: parent.width
-            }
-
-            Rectangle {
-                id: collierRectangle
-                width: bienvenue.width * 0.9
-                height: nomanimal.height
-                radius: 10
-                border.color: "#707070"
-                border.width: 1
-                anchors.top: colliertxt.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.topMargin: 2
-
-                //Rentrer la clé d'activation
-                TextInput {
-                    id: collierInput
-                    width: bienvenue.width * 0.9
-                    anchors.horizontalCenter: collierRectangle.horizontalCenter
-                    anchors.verticalCenter: collierRectangle.verticalCenter
-                    font.pixelSize: rectangleHaut.height * 0.25
-                    horizontalAlignment: Text.AlignHCenter
-                    anchors.top: collierRectangle.top
-                    anchors.topMargin: 2
-                }
-            }
-
             Row {
                 id:boutonsbas
                 width: bienvenue.width
                 anchors.bottom: bienvenue.bottom
-                height: collierRectangle.height * 2
+				height: vertslider.height * 2
 
                 Button {
                    id: ajouter
-                   width: collierRectangle.width * 0.4
-                   text: qsTr("Ajouter")
+				   width: annuler.width
+				   text: "Ajouter"
                    anchors.verticalCenter: parent.verticalCenter
                    anchors.leftMargin: bienvenue.width * 0.0875
-                   height: parent.height * 0.4
+				   height: annuler.height
                    anchors.left: boutonsbas.left
                    anchors.bottom: boutonsbas.bottom
                    anchors.bottomMargin: 10
@@ -291,7 +266,7 @@ Item {
 					   else {
 						   console.log(typeanimalRectangle.currentText)
 						   console.log(sliderdistance.value)
-						   Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value, Database.idutilisateur)
+                           Database.creerAnimal(nomanimalInput.text, (yearPicker3.year+"-"+monthPicker3.month+"-"+dayPicker3.day), typeanimalRectangle.currentText, sliderdistance.value)
 						   stackView.push("Gestion.qml")
 					   }
                    }
@@ -299,9 +274,9 @@ Item {
 
                    Button {
                       id: annuler
-                      width: collierRectangle.width * 0.4
-                      text: qsTr("Annuler")
-                      height: parent.height * 0.4
+					  width: parent.width * 0.4
+					  text: "Annuler"
+					  height: parent.height * 0.4
                       anchors.right: boutonsbas.right
                       anchors.verticalCenter: parent.verticalCenter
                       anchors.rightMargin: bienvenue.width * 0.0875
@@ -342,7 +317,7 @@ Item {
 
         Text {
             id: textdate3
-            text: qsTr("Né le :")
+			text: "Né le :"
             height: 0.2 * menuCalendrier3.height
             width: menuCalendrier3.width
             anchors.top: menuCalendrier3.Top
@@ -358,14 +333,14 @@ Item {
 
             Text {
                 id: textAnnee3
-                text: qsTr("Année")
+				text: "Année"
                 width: yearPicker3.width
                 horizontalAlignment: Text.AlignHCenter
             }
 
             Text {
                 id: textMois3
-                text: qsTr("Mois")
+				text: "Mois"
                 anchors.left: textAnnee3.right
                 width: monthPicker3.width
                 horizontalAlignment: Text.AlignHCenter
@@ -373,7 +348,7 @@ Item {
 
             Text {
                 id: textJour3
-                text: qsTr("Jour")
+				text: "Jour"
                 anchors.left: textMois3.right
                 width: dayPicker3.width
                 horizontalAlignment: Text.AlignHCenter
@@ -453,7 +428,7 @@ Item {
         Button {
            id: okButton3
            width: dayPicker3.width
-           text: qsTr("OK")
+		   text: "OK"
            height: textJour3.height * 1.5
            anchors.left: monthPicker3.right
            anchors.top: dayPicker3.bottom

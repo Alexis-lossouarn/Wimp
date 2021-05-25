@@ -27,5 +27,7 @@
         <file>MinutePicker.qml</file>
         <file>HourPicker.qml</file>
         <file>DayPicker.qml</file>
+        <file>Colliers.qml</file>
+        <file>Listeanimaux.qml</file>
     </qresource>
 </RCC>

@@ -24,7 +24,10 @@ class Database : public QObject
     Q_PROPERTY(QStringList listeTypes READ getTypes)
 
     //Table animal
-    Q_PROPERTY(QStringList listeAnimaux READ getAnimaux)
+    Q_PROPERTY(QStringList listeAnimaux READ getAnimaux_list)
+    Q_PROPERTY(QString typeanimal READ getAnimal_type)
+    Q_PROPERTY(QString ageanimal READ getAnimal_age)
+    Q_PROPERTY(QVariant animaux READ getAnimaux)
 
 public:
     Database(QObject *parent = nullptr);
@@ -36,9 +39,13 @@ public:
     //Table client
     Q_INVOKABLE bool profilExist(QString email, QString mdp);
     Q_INVOKABLE bool creerCompte(QString nom, QString prenom, QString email, QString mdp);
+    Q_INVOKABLE bool deconnexion();
 
     //Table animal
-    Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance, QString idUtilisateur);
+    Q_INVOKABLE bool creerAnimal(QString nomAnimal, QString naissance, QString type, QString distance);
+    Q_INVOKABLE bool animalExist(QString nomAnimal);
+    Q_INVOKABLE bool lireAnimal();
+
 
     //Table client
     QString getMail();
@@ -50,8 +57,11 @@ public:
     //Table types
     QStringList getTypes();
 
-    //Tables animal
-    QStringList getAnimaux(QString id_client);
+    //Table animaux
+    QStringList getAnimaux_list();
+    QString getAnimal_type();
+    QString getAnimal_age();
+    QVariant getAnimaux();
 
 
 private:
@@ -61,20 +71,36 @@ private:
 
     //Table client
     QString email;
-    QString password;
     QString mail;
+    QString password;
+    QString mdp;
+    int id_client;
     QString name;
     QString lastname;
-    uint idutilisateur;
-    QString mdp;
 
     //Table type
     QStringList listeTypes;
 
     //Table animal
     QStringList listeAnimaux;
+    QString nom_Animal;
+    int id_animal;
+    QString date_animal;
+    QString type_animal;
+    QList<QObject*> animaux;
+    QString animal;
 
-public slots:
+
+    bool recuperer(QString requete, QStringList &donnees);
+    bool recuperer(QString requete, QVector<QStringList> &donnees);
+    bool recuperer(QString requete, QString &donnees);
+
+signals:
+    void erreurChanged();
+    void listeRelevesChanged();
+    void mesuresUpdated();
+    void mesuresErreur();
+    void moyenneUpdated();
 };
 
 #endif // DATABASE_H

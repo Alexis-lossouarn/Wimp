@@ -35,7 +35,7 @@ ApplicationWindow {
                 y: 0 - (entete.height * 0.45)
                 width: entete.width * 0.4
                 height: entete.height * 1.7
-                source: "dogo.png"
+				source: "images/dogo.png"
                 clip: true
                 fillMode: Image.PreserveAspectFit
             }
@@ -45,7 +45,7 @@ ApplicationWindow {
                 width: entete.width * 0.2
                 height: entete.height
                 anchors.left: parent.left
-                source: "WIMP-logo.png"
+				source: "images/WIMP-logo.png"
                 clip: true
                 fillMode: Image.PreserveAspectFit
             }

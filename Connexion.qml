@@ -3,6 +3,50 @@ import QtQuick.Controls 2.15
 
 Item {
 
+	Timer {
+		id: timervide
+		repeat: false
+		interval: 0
+
+		onTriggered: {
+			videText.text = "Champ(s) vide(s) !"
+			videRectangle.visible = true
+		}
+	}
+
+	Timer {
+		id: timervide2
+		repeat: false
+		interval: 2000
+
+		onTriggered: {
+			videText.text = ""
+			videRectangle.visible = false
+		}
+	}
+
+	Timer {
+		id: timerexistepas
+		repeat: false
+		interval: 0
+
+		onTriggered: {
+			videText.text = "Ce compte n'existe pas !"
+			videRectangle.visible = true
+		}
+	}
+
+	Timer {
+		id: timerexistepas2
+		repeat: false
+		interval: 2000
+
+		onTriggered: {
+			videText.text = ""
+			videRectangle.visible = false
+		}
+	}
+
     Rectangle {
         id: rectangleBas
         color: "#c5002256"
@@ -31,7 +75,7 @@ Item {
                        anchors.top: bienvenue.top
                        anchors.right: column.right
                        width: textAccueil.width * 0.4
-                       height: connexion.height * 1
+					   height: connexion.height * 1.5
 
                        contentItem: Text {
                            text: retour.text
@@ -80,7 +124,7 @@ Item {
                 Rectangle {
                     id: connexionRectangle
                     width: bienvenue.width * 0.8
-                    height: connexion.height
+					implicitHeight: connexionInput.implicitHeight * 1.3
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
@@ -91,14 +135,15 @@ Item {
                     //Rentrer l'identifiant
                     TextInput {
                         id: connexionInput
-                        width: textAccueil.width * 0.9
-                        height: connexion.height
+						width: textAccueil.width * 0.9
+						height: connexion.height
+						font.pixelSize: rectangleHaut.height * 0.25
                         anchors.horizontalCenter: connexionRectangle.horizontalCenter
                         anchors.verticalCenter: connexionRectangle.verticalCenter
-                        font.pixelSize: rectangleHaut.height * 0.25
-                        horizontalAlignment: Text.AlignHCenter
-                        anchors.verticalCenterOffset: 3
-                        anchors.horizontalCenterOffset: 0
+						horizontalAlignment: Text.AlignHCenter
+						wrapMode: Text.Wrap
+						anchors.verticalCenterOffset: 3
+						anchors.horizontalCenterOffset: 0
                     }
                 }
 
@@ -115,7 +160,7 @@ Item {
                 Rectangle {
                     id: mdpRectangle
                     width: bienvenue.width * 0.8
-                    height: connexion.height
+					implicitHeight: mdpInput.implicitHeight * 1.3
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
@@ -128,12 +173,13 @@ Item {
                         id: mdpInput
                         width: textAccueil.width * 0.9
                         height: connexion.height
+						wrapMode: Text.Wrap
                         anchors.horizontalCenter: mdpRectangle.horizontalCenter
                         anchors.verticalCenter: mdpRectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
                         horizontalAlignment: Text.AlignHCenter
-                        anchors.verticalCenterOffset: 3
-                        anchors.horizontalCenterOffset: 0
+						anchors.verticalCenterOffset: 3
+						anchors.horizontalCenterOffset: 0
                     }
                 }
 
@@ -163,19 +209,52 @@ Item {
                         radius: 15
                     }
 
-                    onClicked: {
+                    onClicked: {						
 
-						if(Database.profilExist(connexionInput.text, mdpInput.text) != 1)
+						if(connexionInput.text == "" || mdpInput.text == "")
+						{
+							console.log("Champ(s) vide")
+							timervide.start();
+							timervide2.start();
+						}
+
+						else if(Database.profilExist(connexionInput.text, mdpInput.text) !== 1)
 						{
 							stackView.push("Principale.qml")
 							console.log("Connexion réussie !")
 						}
 
-						else if(connexionInput.text == "" || mdpInput.text == "") console.log("Champ vide !")
-
-						else console.log("Ce compte n'existe pas !")
+						else
+						{
+							console.log("Ce compte n'existe pas !")
+							timerexistepas.start();
+							timerexistepas2.start();
+						}
                     }
                 }
+
+				Rectangle {
+					id:videRectangle
+					border.color: "red"
+					border.width: 1
+					visible: false
+					width: videText.implicitWidth * 1.3
+					height: connexion.height
+					radius: 8
+					anchors.top: envoyer.bottom
+					anchors.topMargin: 10
+					anchors.horizontalCenter: parent.horizontalCenter
+
+					Text {
+						id: videText
+						text: ""
+						color: "red"
+						width: parent.width
+						height: parent.height
+						horizontalAlignment: Text.AlignHCenter
+						verticalAlignment: Text.AlignVCenter
+					}
+				}
             }
         }
 

@@ -6,6 +6,7 @@ import QtQuick.Controls.Material 2.1
 
 Rectangle {
 	id: listeAnimaux
+	width: parent.width
 	anchors.fill: parent
 	color: "#cfcfcf"
 	ListView {
@@ -20,12 +21,7 @@ Rectangle {
 			Column {
 				id: colonne
 				padding: 5
-				Text { text: model.modelData.nom_animal; }
-				Text { text: model.modelData.naissance_animal }
-				Text { text: model.modelData.type_animal; }
-				Text { text: model.modelData.distance; }
-				Text { text: model.modelData.id_collier; }
-
+				Text { text: '<b>Température : ' + model.modelData.id_animal + ' °C</b>'; font.italic: true }
 			}
 		}
 		focus: true

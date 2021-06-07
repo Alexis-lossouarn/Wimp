@@ -16,7 +16,7 @@ class Animaux : public QObject
     Q_PROPERTY(QString id_utilisateur READ getId_utilisateur_animal NOTIFY animaux)
 
 public:
-    explicit Animaux( QString nom_animal, QString naissance_animal, QString type_animal, double distance, uint id_collier, QObject *parent = nullptr);
+    explicit Animaux( uint id_animal, QString nom_animal, QString naissance_animal, QString type_animal, double distance, uint id_collier, uint id_utilisateur, QObject *parent = nullptr);
 
     uint getId_animal() const;
     QString getNom_animal() const;

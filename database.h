@@ -15,8 +15,8 @@ class Database : public QObject
     Q_OBJECT
     //Table client
     Q_PROPERTY(QString mail READ getMail)
-    Q_PROPERTY(QString name READ getNom)
-    Q_PROPERTY(QString lastname READ getPrenom)
+    Q_PROPERTY(QString name READ getNom NOTIFY profilUpdated)
+    Q_PROPERTY(QString lastname READ getPrenom NOTIFY profilUpdated)
     Q_PROPERTY(uint idutilisateur READ getIdu)
     Q_PROPERTY(QString mdp READ getPassword)
 
@@ -25,9 +25,9 @@ class Database : public QObject
 
     //Table animal
     Q_PROPERTY(QStringList listeAnimaux READ getAnimaux_list)
-    Q_PROPERTY(QString typeanimal READ getAnimal_type)
-    Q_PROPERTY(QString ageanimal READ getAnimal_age)
-    Q_PROPERTY(QVariant animaux READ getAnimaux)
+    Q_PROPERTY(QString typeanimal READ getAnimal_type NOTIFY animalChanged)
+    Q_PROPERTY(QString ageanimal READ getAnimal_age NOTIFY animalChanged)
+    Q_PROPERTY(QVariant animaux READ getAnimaux NOTIFY animauxChanged)
 
 public:
     Database(QObject *parent = nullptr);
@@ -96,11 +96,12 @@ private:
     bool recuperer(QString requete, QString &donnees);
 
 signals:
-    void erreurChanged();
-    void listeRelevesChanged();
-    void mesuresUpdated();
-    void mesuresErreur();
-    void moyenneUpdated();
+    void animalChanged();
+    void utilisateurChanged();
+    void animauxChanged();
+    void profilUpdated();
+    void colliersUpdated();
+    void animauxUpdated();
 };
 
 #endif // DATABASE_H

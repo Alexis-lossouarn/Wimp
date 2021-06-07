@@ -16,12 +16,12 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("Database", new Database());
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    QSqlQuery query("SELECT * FROM clients");
+    QSqlQuery query("SELECT * FROM animaux");
     //query.exec("INSERT INTO clients VALUES (18, 'Lossouarn', 'Alexis', 'alexou22340@gmail.com', '1234q', 1)");
     while (query.next()) {
             uint id = query.value(0).toUInt();
             QString nom = query.value(1).toString();
-            QDate naissance = query.value(2).toDate();
+            QString naissance = query.value(2).toString();
             QString type = query.value(3).toString();
             double distance = query.value(4).toDouble();
             uint collier = query.value(5).toUInt();

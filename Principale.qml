@@ -3,12 +3,19 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls 2.5
 import QtQuick.Dialogs 1.2
 import QtQuick.Layouts 1.12
-import QtPositioning 5.12
-import QtLocation 5.12
+import QtWebEngine 1.8
 
 
 Item {
 	id:window
+
+	Connections {
+		target: Database
+		onAnimalChanged: {
+			ageanimal.text = Database.ageanimal
+			typedelanimal.text = Database.typeanimal
+		}
+	}
 
     Rectangle {
         id: rectangleMilieu
@@ -52,11 +59,11 @@ Item {
 
                         background: Rectangle {
                             color: "transparent"
-                        }
+						}
 
                         indicator: Image {
                             id: flechegris
-                            source: "fleche.png"
+							source: "images/fleche.png"
                             anchors.right: choixAnimal.right
                             anchors.rightMargin: 3
                             anchors.verticalCenter: choixAnimal.verticalCenter
@@ -69,13 +76,13 @@ Item {
                                 width: choixAnimal.width * .9
                                 height: choixAnimal.height * 3
                                 implicitHeight: contentItem.implicitHeight
-                                padding: 1
+								padding: 1
 
                                 contentItem: ListView {
 									id: animalchange
                                     clip: true
-                                    onCurrentItemChanged: Database.animalExist(choixAnimal.currentText)
-                                    implicitHeight: contentHeight
+									onCurrentItemChanged: Database.animalExist(choixAnimal.currentText)
+									implicitHeight: contentHeight
                                     ScrollIndicator.vertical: ScrollIndicator {}
                                     model: choixAnimal.popup.visible ? choixAnimal.delegateModel : null
                                 }
@@ -109,7 +116,7 @@ Item {
 
                     Text {
 						id: typedelanimal
-						text: animalchange.currentItem.containmentMaskChanged() ? "Type" : Database.typeanimal
+						text: "Type"
                         width: rectangleTypeanimal.width
                         color: "#ffffff"
                         anchors.verticalCenter: parent.verticalCenter
@@ -131,9 +138,9 @@ Item {
                     anchors.right: parent.right
                     anchors.rightMargin: parent.width / (25/1.5)
 
-                    Text {
+					Text {
                         id: ageanimal
-						text: animalchange.currentItem.containmentMaskChanged() ? "Âge" : Database.ageanimal
+						text: "Âge"
 						anchors.verticalCenter: parent.verticalCenter
                         width: rectangleAgeanimal.width
                         color: "#ffffff"
@@ -149,13 +156,13 @@ Item {
                 height: rectangleMilieu.height * 0.2
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 0
-                width: parent.width
+				width: parent.width
 
                 Rectangle {
                     id: rectangleCalendrier
                     height: row3Milieu.height
                     radius: 2
-                    width: (9/10) * parent.width
+					width: (9/10) * parent.width
                     border.color: "#707070"
                     border.width: 1
                     anchors.left: parent.left
@@ -188,10 +195,10 @@ Item {
 
                         Image {
                             id: flecheor
-                            source: "flecheor.png"
+							source: "images/flecheor.png"
                         }
                     }
-                }
+				}
 
                 ToolButton {
                     id : option
@@ -200,8 +207,7 @@ Item {
                     visible: true
                     text: "\u2630"      //le texte représente l'icône des parametres
                     anchors.right: parent.right
-                    anchors.verticalCenter: ouvrircalendrier.verticalCenter
-                    anchors.rightMargin: 8
+					anchors.rightMargin: 8
                     onClicked: {
                         //ouvre les paramètres
                         parametre.open()
@@ -222,17 +228,17 @@ Item {
                         color: "transparent"
                     }
                 }
-            }
+			}
         }
     }
 
     // Rectangle qui correspond à la carte Open Street
-	Image {
-		id: name
-		source: "wtf.jpg"
+	WebEngineView {
+		id: map
 		width: parent.width
 		anchors.bottom: window.bottom
 		anchors.top: rectangleMilieu.bottom
+		url: "http://192.168.15.87:1234"
 	}
 
     //les paramètres :
@@ -326,7 +332,7 @@ Item {
 
                 background: Image {
                     id: fermerparametre
-                    source: "croix.png"
+					source: "images/croix.png"
                 }
 
                 onClicked: {					

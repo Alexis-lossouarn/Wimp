@@ -2,8 +2,6 @@
 #include "animaux.h"
 #include "clients.h"
 #include "colliers.h"
-#include "gps.h"
-#include "types.h"
 
 Database::Database(QObject *parent) : QObject(parent), erreurConnexion(false)
 {
@@ -39,6 +37,7 @@ bool Database::executerRequete(QString requete)
     if(db.isOpen())                                                     //Si la BDD est ouverte
     {
         bool retour = r.exec(requete);                                  // Executer la requête
+        emit profilUpdated();
         return retour;
     }
     return false;
@@ -103,8 +102,6 @@ bool Database::recuperer(QString requete, QString &donnees)
         return false;
 }
 
-
-
 bool Database::creerCompte(QString nom, QString prenom , QString email, QString mdp)
 {
     QSqlQuery r;
@@ -112,9 +109,10 @@ bool Database::creerCompte(QString nom, QString prenom , QString email, QString 
     if(db.isOpen())
     {
         mdp = QString(QCryptographicHash::hash((mdp.toUtf8()), QCryptographicHash::Sha3_512).toHex());
-        qDebug () << mdp;
+        emit profilUpdated();
         bool retour = r.exec("INSERT INTO clients (nom, prenom, email, password) VALUES ('" + nom + "', '" + prenom + "','" + email + "', '" + mdp + "')");
         return retour;
+
     }
     return false;
 }
@@ -153,8 +151,8 @@ bool Database::profilExist(QString email, QString mdp)
 
 bool Database::deconnexion()
 {
-    db.close();
-    db.open();
+    db.~QSqlDatabase();
+    return true;
 }
 
 QString Database::getMail()
@@ -202,6 +200,7 @@ bool Database::creerAnimal(QString nomAnimal, QString naissance, QString type, Q
             r.prepare("INSERT INTO animaux (nom_animal, naissance_animal, type_animal, distance, id_utilisateur) VALUES ('" + nomAnimal + "', '" + naissance + "','" + type + "', " + distance + ", (:id))");
             r.bindValue(":id", this->id_client);
             bool retour = r.exec();
+            emit animauxUpdated();
             return retour;
         }
         return false;
@@ -213,17 +212,19 @@ QStringList Database::getAnimaux_list()
 {
     if(db.isOpen())
     {
-        QSqlQuery r;
+        listeAnimaux.clear();
+        QSqlQuery r;        
         r.prepare("SELECT nom_animal FROM animaux WHERE id_utilisateur = (:id)");
         r.bindValue(":id", this->id_client);
-
         bool retour = r.exec();
+
         if(retour)
         {
             while (r.next())
             {
                 listeAnimaux << r.value(0).toString();
             }
+
             return listeAnimaux;
         }
         else
@@ -254,7 +255,8 @@ bool Database::animalExist(QString nomAnimal)
             nom_Animal = nomAnimal;
             type_animal = r.value(3).toString();
             date_animal =r.value(2).toString();
-            qDebug() << type_animal;
+            qDebug() << "animal update";
+            emit animalChanged();
             return existe;
         }
 
@@ -285,43 +287,41 @@ bool Database::lireAnimal()
     QString requete;
     qDebug() << "1";
 
-    requete = "SELECT animaux.nom_animal,animaux.naissance_animal,animaux.type_animal,animaux.distance,id_collier FROM animaux ";
+    requete = "SELECT * FROM animaux ";
 
     qDeleteAll(animaux);
     animaux.clear();
 
     if(recuperer(requete, relevesMesures))
     {
-        qDebug() << "2";
         for(int i=0;i<relevesMesures.count();i++)
         {
-            Animaux *m = new Animaux(relevesMesures.at(i).at(0), relevesMesures.at(i).at(0), relevesMesures.at(i).at(0), relevesMesures.at(i).at(0).toDouble(), relevesMesures.at(i).at(0).toInt(), this);
-            qDebug() << "3";
+            Animaux *m = new Animaux(relevesMesures.at(i).at(0).toUInt(), relevesMesures.at(i).at(0), relevesMesures.at(i).at(0), relevesMesures.at(i).at(0), relevesMesures.at(i).at(0).toDouble(), relevesMesures.at(i).at(0).toUInt(), relevesMesures.at(i).at(0).toUInt(), this);
             animaux.append(m);
+            qDebug() << "2";
         }
 
         if(animaux.count() > 0)
         {
-            qDebug() << "4";
-            emit mesuresUpdated();
+            emit animauxUpdated();
+            qDebug() << relevesMesures.at(0).at(5);
             return true;
         }
         else
         {
-            qDebug() << "5";
-            emit mesuresErreur();
+            return false;
         }
     }
     else
     {
-        qDebug() << "6";
-        emit mesuresErreur();
+        return false;
     }
     return false;
 }
 
 QVariant Database::getAnimaux()
 {
+    qDebug() << QVariant::fromValue(animaux);
     return QVariant::fromValue(animaux);
 }
 

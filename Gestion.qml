@@ -61,7 +61,7 @@ Item {
 
                                     background: Image {
                                         id: name
-                                        source: "menu2.png"
+										source: "images/menu2.png"
                                     }
 
                                     onClicked: {
@@ -162,7 +162,7 @@ Item {
 
                                             Image {
                                                 anchors.fill: parent
-                                                source: "wtf.jpg"
+												source: "images/wtf.jpg"
                                                 fillMode: Image.PreserveAspectCrop
                                             }
                                             visible: false
@@ -397,7 +397,7 @@ Item {
 
                                 background: Image {
                                     id: fermerparametre
-                                    source: "croix.png"
+									source: "images/croix.png"
                                 }
 
                                 onClicked: {
@@ -512,7 +512,7 @@ Item {
 
                                     background: Image {
                                         id: namep2
-                                        source: "menu2.png"
+										source: "images/menu2.png"
                                     }
 
                                     onClicked: {
@@ -534,15 +534,17 @@ Item {
 									Row {
 										ListView {
 											id: resultats
-											width: parent.width
-											height: parent.height
+											width: rectangleanimal.width
+											height: rectangleanimal.height
 											focus: true
 											snapMode: ListView.SnapOneItem
 											highlightRangeMode: ListView.StrictlyEnforceRange
 											highlightMoveDuration: 250
 											orientation: ListView.Horizontal
 											boundsBehavior: Flickable.StopAtBounds
-											model: Listeanimaux {}
+											model: ListModel {
+												ListElement {component: "Listeanimaux.qml"}
+											}
 											delegate: Loader {
 												width: resultats.width
 												height: resultats.height
@@ -675,7 +677,7 @@ Item {
 
                             background: Image {
                                 id: fermerparametrep2
-                                source: "croix.png"
+								source: "images/croix.png"
                             }
 
                             onClicked: {

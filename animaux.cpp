@@ -1,6 +1,6 @@
 #include "animaux.h"
 
-Animaux::Animaux(QString nom_animal, QString naissance_animal, QString type_animal, double distance, uint id_collier, QObject *parent)
+Animaux::Animaux( uint id_animal, QString nom_animal, QString naissance_animal, QString type_animal, double distance, uint id_collier, uint id_utilisateur, QObject *parent)
 {
 }
 

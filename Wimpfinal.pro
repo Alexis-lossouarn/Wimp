@@ -11,9 +11,7 @@ SOURCES += \
         clients.cpp \
         colliers.cpp \
         database.cpp \
-        gps.cpp \
-        main.cpp \
-        types.cpp
+        main.cpp
 
 RESOURCES += qml.qrc
 
@@ -32,10 +30,7 @@ HEADERS += \
     animaux.h \
     clients.h \
     colliers.h \
-    database.h \
-    gps.h \
-    types.h
+    database.h
 ANDROID_ABIS = armeabi-v7a
 
-DISTFILES += \
-    Crypted.java
+DISTFILES +=

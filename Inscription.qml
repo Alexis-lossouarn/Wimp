@@ -3,6 +3,28 @@ import QtQuick.Controls 2.15
 
 Item {
 
+	Timer {
+		id: timervide
+		repeat: false
+		interval: 0
+
+		onTriggered: {
+			videText.text = "Champ(s) vide(s) !"
+			videRectangle.visible = true
+		}
+	}
+
+	Timer {
+		id: timervide2
+		repeat: false
+		interval: 2000
+
+		onTriggered: {
+			videText.text = ""
+			videRectangle.visible = false
+		}
+	}
+
     Rectangle {
         id: rectangleBas
         color: "#c5002256"
@@ -34,7 +56,7 @@ Item {
                        anchors.rightMargin: 0
                        anchors.right: column.right
                        width: textAccueil.width * 0.4
-                       height: textAccueil.height * 0.8
+					   height: textAccueil.height * 1.2
 
                        contentItem: Text {
                            text: retour.text
@@ -59,6 +81,31 @@ Item {
                            stackView.push("Accueil.qml")
                        }
                 }
+
+				Rectangle {
+					id:videRectangle
+					border.color: "red"
+					border.width: 1
+					visible: false
+					width: videText.implicitWidth * 1.3
+					height: textnom.height
+					radius: 8
+					anchors.bottom: textAccueil.top
+					anchors.bottomMargin: 10
+					anchors.right: retour.left
+					anchors.rightMargin: 10
+					anchors.left: bienvenue.left
+
+					Text {
+						id: videText
+						text: ""
+						color: "red"
+						width: parent.width
+						height: parent.height
+						horizontalAlignment: Text.AlignHCenter
+						verticalAlignment: Text.AlignVCenter
+					}
+				}
 
                 Text {
                     id: textAccueil
@@ -85,7 +132,7 @@ Item {
 				Rectangle {
 					id: nomRectangle
 					width: bienvenue.width * 0.8
-					height: textnom.height
+					height: nomInput.implicitHeight * 1.3
 					radius: 10
 					border.color: "#707070"
 					border.width: 1
@@ -101,6 +148,7 @@ Item {
 						anchors.verticalCenter: nomRectangle.verticalCenter
 						font.pixelSize: rectangleHaut.height * 0.25
 						horizontalAlignment: Text.AlignHCenter
+						wrapMode: Text.Wrap
 						anchors.verticalCenterOffset: 2
 						anchors.horizontalCenterOffset: 0
 					}
@@ -120,7 +168,7 @@ Item {
                 Rectangle {
 					id: prenomRectangle
                     width: bienvenue.width * 0.8
-					height: textprenom.height
+					height: prenomInput.implicitHeight * 1.3
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
@@ -132,6 +180,7 @@ Item {
 						id: prenomInput
                         width: textAccueil.width * 0.9
 						height: textnom.height
+						wrapMode: Text.Wrap
 						anchors.horizontalCenter: prenomRectangle.horizontalCenter
 						anchors.verticalCenter: prenomRectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
@@ -155,7 +204,7 @@ Item {
                 Rectangle {
 					id: mailRectangle
                     width: bienvenue.width * 0.8
-					height: textnom.height
+					height: mailInput.implicitHeight * 1.3
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
@@ -167,6 +216,7 @@ Item {
 						id: mailInput
                         width: textAccueil.width * 0.9
 						height: textnom.height
+						wrapMode: Text.Wrap
 						anchors.horizontalCenter: mailRectangle.horizontalCenter
 						anchors.verticalCenter: mailRectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
@@ -190,7 +240,7 @@ Item {
                 Rectangle {
 					id: mdpRectangle
                    width: bienvenue.width * 0.8
-					height: textnom.height
+					height: mdpInput.implicitHeight * 1.3
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
@@ -202,6 +252,7 @@ Item {
 						id: mdpInput
                         width: textAccueil.width
 						height: textnom.height
+						wrapMode: Text.Wrap
 						anchors.horizontalCenter: mdpRectangle.horizontalCenter
 						anchors.verticalCenter: mdpRectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
@@ -225,7 +276,7 @@ Item {
                 Rectangle {
 					id: mdp2Rectangle
                     width: bienvenue.width * 0.8
-					height: textnom.height
+					height: mdp2Input.implicitHeight * 1.3
                     radius: 10
                     border.color: "#707070"
                     border.width: 1
@@ -237,6 +288,7 @@ Item {
 						id: mdp2Input
                         width: textAccueil.width
 						height: textnom.height
+						wrapMode: Text.Wrap
 						anchors.horizontalCenter: mdp2Rectangle.horizontalCenter
 						anchors.verticalCenter: mdp2Rectangle.verticalCenter
                         font.pixelSize: rectangleHaut.height * 0.25
@@ -244,56 +296,58 @@ Item {
                         anchors.verticalCenterOffset: 2
                         anchors.horizontalCenterOffset: 0
                     }
-                }
-
-                Button {
-                       id: envoyer
-                       width: 90
-					   text: "Envoyer"
-					   anchors.top: mdp2Rectangle.bottom
-					   anchors.topMargin: mdp2Rectangle.height
-                       anchors.horizontalCenter: parent.horizontalCenter
-                       height: 30
-
-                       contentItem: Text {
-                           text: envoyer.text
-                           font: envoyerfont
-                           opacity: enabled ? 1.0 : 0.3
-                           color: "#ffffffff"
-                           horizontalAlignment: Text.AlignHCenter
-                           verticalAlignment: Text.AlignVCenter
-                           elide: Text.ElideRight
-                       }
-
-                       background: Rectangle {
-                           implicitWidth: 100
-                           implicitHeight: 40
-                           opacity: enabled ? 1 : 0.3
-                           color: "#b3a36d00"
-                           radius: 11
-                       }
-
-                       onClicked: {
-
-							//Ouvre la page Principale
-							//Database.executerRequete("INSERT INTO clients")
-						   if(nomInput.text == "" || prenomInput.text == "" || mailInput.text == "" || mdpInput.text == "" || mdp2Input.text == "")
-						   {
-							   console.log("Champ vide")
-							}
-
-							else if(mdpInput.text != mdp2Input.text) console.log("Mot de passes différents !")
-
-							else
-						   {
-							   Database.creerCompte(prenomInput.text, nomInput.text, mailInput.text, mdpInput.text)
-							   stackView.push("Principale.qml")
-						   }
-
-                       }
-                }
+                }                
             }
         }
+
+		Button {
+			   id: envoyer
+			   width: 90
+			   text: "Envoyer"
+			   anchors.bottom: bienvenue.bottom
+			   anchors.horizontalCenter: parent.horizontalCenter
+			   height: 30
+
+			   contentItem: Text {
+				   text: envoyer.text
+				   font: envoyerfont
+				   opacity: enabled ? 1.0 : 0.3
+				   color: "#ffffffff"
+				   horizontalAlignment: Text.AlignHCenter
+				   verticalAlignment: Text.AlignVCenter
+				   elide: Text.ElideRight
+			   }
+
+			   background: Rectangle {
+				   implicitWidth: 100
+				   implicitHeight: 40
+				   opacity: enabled ? 1 : 0.3
+				   color: "#b3a36d00"
+				   radius: 11
+			   }
+
+			   onClicked: {
+
+					//Ouvre la page Principale
+					//Database.executerRequete("INSERT INTO clients")
+				   if(nomInput.text == "" || prenomInput.text == "" || mailInput.text == "" || mdpInput.text == "" || mdp2Input.text == "")
+				   {
+					   console.log("Champ vide")
+					   timervide.start();
+					   timervide2.start();
+					}
+
+					else if(mdpInput.text != mdp2Input.text) console.log("Mot de passes différents !")
+
+					else
+				   {
+					   Database.creerCompte(prenomInput.text, nomInput.text, mailInput.text, mdpInput.text)
+					   Database.profilExist(mailInput.text, mdpInput.text)
+					   stackView.push("Principale.qml")
+				   }
+
+			   }
+		}
 
         //Mention légales
         ToolButton {
@@ -331,7 +385,7 @@ Item {
                 color: "transparent"
                 radius: 15
             }
-        }
+		}
     }
 
     //Pop-up mention légales

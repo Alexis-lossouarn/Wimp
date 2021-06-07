@@ -5,28 +5,6 @@ Item {
     id:ajoutanimal
     visible: true
 
-	Timer {
-		id: timervide
-		repeat: false
-		interval: 0
-
-		onTriggered: {
-			videText.text = "Champ(s) vide(s) !"
-			videRectangle.visible = true
-		}
-	}
-
-	Timer {
-		id: timervide2
-		repeat: false
-		interval: 2000
-
-		onTriggered: {
-			videText.text = ""
-			videRectangle.visible = false
-		}
-	}
-
     Rectangle {
         id: rectangleBas
         color: "#c5002256"
@@ -283,12 +261,7 @@ Item {
                    }
 
                    onClicked: {
-					   if (nomanimalInput.text == "" || anneeanimalInput.text == "" || typeanimal.text == "")
-					   {
-						   console.log("Champ(s) vide(s) !")
-						   timervide.start();
-						   timervide2.start();
-					   }
+					   if (nomanimalInput.text == "" || anneeanimalInput.text == "" || typeanimal.text == "") console.log("Champ(s) vide(s)")
 
 					   else {
 						   console.log(typeanimalRectangle.currentText)
@@ -332,29 +305,6 @@ Item {
                       }
                 }
             }
-
-			Rectangle {
-				id:videRectangle
-				border.color: "red"
-				border.width: 1
-				visible: false
-				width: videText.implicitWidth * 1.3
-				height: nomanimal.height
-				radius: 8
-				anchors.top: sliderdistance.bottom
-				anchors.topMargin: 20
-				anchors.horizontalCenter: parent.horizontalCenter
-
-				Text {
-					id: videText
-					text: ""
-					color: "red"
-					width: parent.width
-					height: parent.height
-					horizontalAlignment: Text.AlignHCenter
-					verticalAlignment: Text.AlignVCenter
-				}
-			}
         }
     }
 
